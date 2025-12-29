@@ -57,4 +57,11 @@ class ShopsController < ApplicationController
   def shop_params
     params.require(:shop).permit(:name, :address, :area, :description)
   end
+  def photos
+  @reviews = Review.includes(:shop, :user, images_attachments: :blob)
+                   .where.not(active_storage_attachments: { id: nil })
+                   .order(created_at: :desc)
 end
+end
+
+

@@ -9,10 +9,14 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   # ユーザー
-  resources :users, only: [:show]
+ get "/users/new", to: "users#new", as: :new_user
+
 
   # 店舗（CRUD） + 口コミ（店舗に紐づく）
   resources :shops do
     resources :reviews, only: [:new, :create]
+    collection do
+    get :photos
   end
+end
 end

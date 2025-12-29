@@ -1,10 +1,105 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.logo-image{
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.header-right{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-search{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.search-input{
+  height: 34px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  text-decoration: none;
+  color: #111;
+  cursor: pointer;
+}
+
+.dropdown{
+  position: relative;
+}
+
+.dropdown-trigger{
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.dropdown-menu{
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  padding: 8px;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu{
+  display: block;
+}
+
+.dropdown-item{
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #111;
+}
+
+.dropdown-item:hover{
+  background: #f3f4f6;
+}
+
+.dropdown-sep{
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 6px 0;
+}
+
+.dropdown-item.danger{
+  color: #c00;
+}

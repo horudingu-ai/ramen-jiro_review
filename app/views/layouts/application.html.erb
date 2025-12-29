@@ -1,29 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Jiro Review" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Jiro Review">
-    <meta name="mobile-web-app-capable" content="yes">
+    <title>JIRO REVIEW</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
-  </body>
-</html>
+   <header class="site-header">
+  <div class="logo">
+    <%= link_to root_path do %>
+      <%= image_tag "logo.png", alt: "JIRO REVIEW", class: "logo-image" %>
+    <% end %>
+  </div>
+
+  <div class="header-right">
+    <% if logged_in? %>
+      <!-- 検索フォーム（例：shops#index に keyword を投げる） -->
+      <%= form_with url: shops_path, method: :get, local: true, class: "header-search" do |f| %>
+        <%= f.search_field :keyword, value: params[:keyword], placeholder: "店名で検索", class: "search-input" %>
+        <%= f.submit "検索", class: "btn" %>
+      <% end %>
+
+      <!-- 写真一覧ボタン（例：photos_path に合わせて変更） -->
+      <%= link_to "写真一覧", photos_path, class: "btn" %>
+
+     
+    <% else %>
+      <nav class="header-nav">
+        <%= link_to "ログイン", login_path, class: "btn" %>
+       <%= link_to "新規登録", new_user_path, class: "btn" %>
+        <!-- ドロップダウン -->
+      <div class="dropdown">
+        <button class="dropdown-trigger" type="button">
+          メニュー ▼
+        </button>
+
+        <div class="dropdown-menu">
+          <%= link_to "店舗一覧", shops_path, class: "dropdown-item" %>
+          <%= link_to "新規店舗登録", new_shop_path, class: "dropdown-item" %>
+          <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "dropdown-item danger" %>
+        </div>
+      </div>
+      </nav>
+    <% end %>
+  </div>
+</header>

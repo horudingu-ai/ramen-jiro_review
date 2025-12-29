@@ -1,0 +1,18 @@
+<h1>写真一覧</h1>
+
+<div class="photo-grid">
+  <% @reviews.each do |r| %>
+    <% r.images.each do |img| %>
+      <div class="photo-card">
+        <%= link_to shop_path(r.shop) do %>
+          <%= image_tag img, class: "photo-img" %>
+        <% end %>
+        <div class="photo-meta">
+          <div><strong><%= r.shop.name %></strong></div>
+          <div>投稿: <%= r.user.name %></div>
+          <div><%= stars(r.rating) %></div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
