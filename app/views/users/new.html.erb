@@ -1,0 +1,9 @@
+<h1>新規登録</h1>
+
+<%= form_with model: @user, url: signup_path do |f| %>
+  <div><%= f.label :name %><br><%= f.text_field :name %></div>
+  <div><%= f.label :email %><br><%= f.email_field :email %></div>
+  <div><%= f.label :password %><br><%= f.password_field :password %></div>
+  <div><%= f.label :password_confirmation %><br><%= f.password_field :password_confirmation %></div>
+  <%= f.submit "登録" %>
+<% end %>

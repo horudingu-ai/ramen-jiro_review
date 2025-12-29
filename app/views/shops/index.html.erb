@@ -1,0 +1,16 @@
+<h1>店舗一覧</h1>
+<%= form_with url: shops_path, method: :get do %>
+  <%= text_field_tag :q, params[:q], placeholder: "店名 or エリア" %>
+  <%= select_tag :sort, options_for_select([["新着","new"],["古い順","old"]], params[:sort]) %>
+  <%= submit_tag "検索" %>
+<% end %>
+<% if logged_in? %>
+  <p><%= link_to "店舗を登録", new_shop_path %></p>
+<% end %>
+<ul>
+  <% @shops.each do |shop| %>
+    <li>
+      <%= link_to shop.name, shop_path(shop) %>（<%= shop.area %>）
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  shop: one
+  rating: 1
+  body: MyText
+  visit_date: 2025-12-29
+
+two:
+  user: two
+  shop: two
+  rating: 1
+  body: MyText
+  visit_date: 2025-12-29

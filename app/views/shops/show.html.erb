@@ -1,0 +1,31 @@
+<h1><%= @shop.name %></h1>
+<p><%= @shop.area %> / <%= @shop.address %></p>
+<p><%= simple_format(@shop.description) %></p>
+
+<% if logged_in? %>
+  <p><%= link_to "口コミを書く", new_shop_review_path(@shop) %></p>
+<% else %>
+  <p><%= link_to "ログインして口コミを書く", login_path %></p>
+<% end %>
+
+<h2>口コミ</h2>
+<% @reviews.each do |r| %>
+  <div style="border:1px solid #ddd; padding:10px; margin:10px 0;">
+    <p>
+      <strong><%= r.user.name %></strong>
+      <span><%= stars(r.rating) %>（<%= r.rating %>）</span>
+      <% if r.visit_date.present? %>
+        / <%= r.visit_date %>
+      <% end %>
+    </p>
+    <p><%= simple_format(r.body) %></p>
+
+    <% if r.images.attached? %>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <% r.images.each do |img| %>
+          <%= image_tag img, style: "width:160px; height:160px; object-fit:cover;" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
