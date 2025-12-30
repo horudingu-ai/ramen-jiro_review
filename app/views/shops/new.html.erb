@@ -1,2 +1,53 @@
-<h1>Shops#new</h1>
-<p>Find me in app/views/shops/new.html.erb</p>
+<h1>新規店舗登録</h1>
+
+<% if @shop.errors.any? %>
+  <ul>
+    <% @shop.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @shop, local: true do |f| %>
+  <div>
+    <%= f.label :name, "店舗名" %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :address, "住所" %><br>
+    <%= f.text_field :address %>
+  </div>
+
+  <div>
+    <%= f.label :building_photo, "建物の写真（1枚）" %><br>
+    <%= f.file_field :building_photo, accept: "image/*" %>
+  </div>
+
+  <div>
+    <%= f.label :menu_photos, "メニューの写真（最大5枚）" %><br>
+    <%= f.file_field :menu_photos, multiple: true, accept: "image/*" %>
+  </div>
+
+  <div>
+    <%= f.label :business_hours, "営業時間" %><br>
+    <%= f.text_field :business_hours, placeholder: "例）11:00-15:00 / 18:00-22:00" %>
+  </div>
+
+  <div>
+    <%= f.label :closed_days, "定休日" %><br>
+    <%= f.text_field :closed_days, placeholder: "例）水曜日" %>
+  </div>
+
+  <div>
+    <%= f.label :access, "アクセス" %><br>
+    <%= f.text_area :access, rows: 3, placeholder: "例）○○駅から徒歩5分" %>
+  </div>
+
+  <div>
+    <%= f.label :notes, "備考" %><br>
+    <%= f.text_area :notes, rows: 4 %>
+  </div>
+
+  <%= f.submit "登録する" %>
+<% end %>

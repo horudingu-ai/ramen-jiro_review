@@ -7,6 +7,32 @@
 <% else %>
   <p><%= link_to "ログインして口コミを書く", login_path %></p>
 <% end %>
+<h1><%= @shop.name %></h1>
+
+<p>住所：<%= @shop.address %></p>
+<p>営業時間：<%= @shop.business_hours %></p>
+<p>定休日：<%= @shop.closed_days %></p>
+
+<p>アクセス：<br><%= simple_format(@shop.access) %></p>
+<p>備考：<br><%= simple_format(@shop.notes) %></p>
+
+<hr>
+
+<h2>建物の写真</h2>
+<% if @shop.building_photo.attached? %>
+  <%= image_tag @shop.building_photo, style: "max-width: 400px; height: auto;" %>
+<% else %>
+  <p>未登録</p>
+<% end %>
+
+<h2>メニュー写真</h2>
+<% if @shop.menu_photos.attached? %>
+  <% @shop.menu_photos.each do |photo| %>
+    <%= image_tag photo, style: "max-width: 300px; height: auto; margin: 6px;" %>
+  <% end %>
+<% else %>
+  <p>未登録</p>
+<% end %>
 
 <h2>口コミ</h2>
 <% @reviews.each do |r| %>

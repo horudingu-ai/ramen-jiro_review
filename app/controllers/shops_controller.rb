@@ -15,11 +15,9 @@ class ShopsController < ApplicationController
       end
     @shops = scope
   end
-
   def show
     @reviews = @shop.reviews.includes(:user).order(created_at: :desc)
   end
-
   def new
     @shop = Shop.new
   end
@@ -54,9 +52,11 @@ class ShopsController < ApplicationController
     @shop = Shop.find(params[:id])
   end
 
-  def shop_params
-    params.require(:shop).permit(:name, :address, :area, :description)
-  end
+ def shop_params
+  params.require(:shop).permit(
+    :name, :address, :business_hours, :closed_days, :access, :notes
+  )
+end
   def photos
   @reviews = Review.includes(:shop, :user, images_attachments: :blob)
                    .where.not(active_storage_attachments: { id: nil })

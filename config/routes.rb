@@ -18,6 +18,7 @@ resources :photos, only: [:index]
   resources :shops do
     resources :reviews, only: [:new, :create]
     resources :photos, only: [:index]
+    resources :shops
     collection do
     get :photos
   end
