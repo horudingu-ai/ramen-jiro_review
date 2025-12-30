@@ -1,0 +1,18 @@
+<h1>JIRO REVIEW</h1>
+
+<h2>新着店舗</h2>
+
+<% if @new_shops.any? %>
+  <ul>
+    <% @new_shops.each do |shop| %>
+      <li>
+        <%= link_to shop.name, shop_path(shop) %>
+        <small>（<%= shop.created_at.strftime("%Y/%m/%d") %>）</small>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>まだ店舗が登録されていません。</p>
+<% end %>
+
+<p><%= link_to "店舗一覧へ", shops_path, class: "btn" %></p>
