@@ -1,6 +1,29 @@
 <h1><%= @shop.name %> に口コミ投稿</h1>
 
 <%= form_with model: [@shop, @review] do |f| %>
+ <fieldset>
+  <legend>性別（任意）</legend>
+
+  <label>
+    <%= f.radio_button :gender, "male" %>
+    男性
+  </label>
+
+  <label>
+    <%= f.radio_button :gender, "female" %>
+    女性
+  </label>
+
+  <label>
+    <%= f.radio_button :gender, nil, checked: true %>
+    回答しない
+  </label>
+</fieldset>
+
+<div>
+  <%= f.label :age, "年齢（任意）" %><br>
+  <%= f.number_field :age, min: 1, max: 120, placeholder: "例）25" %>
+</div>
   <div>
     <%= f.label :rating, "評価(1〜5)" %><br>
     <%= f.number_field :rating, in: 1..5 %>

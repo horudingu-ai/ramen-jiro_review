@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
     @shop = Shop.find(params[:shop_id])
       end
 
-      def review_params
-    params.require(:review).permit(:rating, :body, :visit_date, images: [])
-      end
+     def review_params
+  params.require(:review).permit(:visit_date,:title,:body,:rating,:gender,:age,images: [])
+end  
 end
