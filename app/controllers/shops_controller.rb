@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
-  before_action :require_login, except: [:index, :show]
+  before_action :require_login, except: [:index, :show, :photos]
 
   def index
     @q = params[:q].to_s
@@ -14,9 +14,11 @@ class ShopsController < ApplicationController
       else scope.order(created_at: :desc)
       end
     @shops = scope
+    @shops = Shop.all
   end
   def show
     @reviews = @shop.reviews.includes(:user).order(created_at: :desc)
+     @shop = Shop.find(params[:id])
   end
   def new
     @shop = Shop.new
@@ -46,7 +48,6 @@ class ShopsController < ApplicationController
     redirect_to shops_path, notice: "店舗を削除しました"
   end
 
-  private
 
   def set_shop
     @shop = Shop.find(params[:id])
@@ -58,11 +59,10 @@ class ShopsController < ApplicationController
     menu_photos: []
   )
 end
-  def photos
-  @reviews = Review.includes(:shop, :user, images_attachments: :blob)
-                   .where.not(active_storage_attachments: { id: nil })
-                   .order(created_at: :desc)
+ def photos
+  @photos = ActiveStorage::Attachment
+    .includes(:record, :blob)
+    .where(record_type: "Shop", name: "menu_photos")
+    .order(created_at: :desc)
 end
 end
-
-

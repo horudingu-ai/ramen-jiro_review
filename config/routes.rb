@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  get "home/index"
-  get "photos/index"
   root "shops#index"
- resources :shops
+
   # 認証
   get    "/signup", to: "users#new"
   post   "/signup", to: "users#create"
@@ -10,17 +8,11 @@ Rails.application.routes.draw do
   post   "/login",  to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  # ユーザー
- get "/users/new", to: "users#new", as: :new_user
+  # 店舗の写真一覧（/shops/:id より先に書くのが重要）
+  get "/shops/photos", to: "shops#photos", as: :photos_shops
 
-resources :photos, only: [:index]
   # 店舗（CRUD） + 口コミ（店舗に紐づく）
   resources :shops do
     resources :reviews, only: [:new, :create]
-    resources :photos, only: [:index]
-    resources :shops
-    collection do
-    get :photos
   end
-end
 end
