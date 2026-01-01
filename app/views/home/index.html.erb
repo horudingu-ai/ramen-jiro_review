@@ -1,18 +1,21 @@
-<h1>JIRO REVIEW</h1>
+<h1>Pick up</h1>
 
-<h2>新着店舗</h2>
+<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:16px;">
+  <% @pickup_shops.each do |shop| %>
+    <% photo = shop.menu_photos.first %>
 
-<% if @new_shops.any? %>
-  <ul>
-    <% @new_shops.each do |shop| %>
-      <li>
-        <%= link_to shop.name, shop_path(shop) %>
-        <small>（<%= shop.created_at.strftime("%Y/%m/%d") %>）</small>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>まだ店舗が登録されていません。</p>
-<% end %>
+    <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+      <%= link_to shop_path(shop), style: "text-decoration:none; color:inherit;" do %>
+        <div style="aspect-ratio:4/3; overflow:hidden;">
+          <%= image_tag photo, style: "width:100%; height:100%; object-fit:cover;" %>
+        </div>
 
-<p><%= link_to "店舗一覧へ", shops_path, class: "btn" %></p>
+        <strong><%= shop.name %></strong><br>
+        <small><%= shop.address %></small>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<p><%= link_to "店舗一覧を見る", shops_path %></p>
+

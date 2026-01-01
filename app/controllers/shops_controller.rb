@@ -3,23 +3,36 @@ class ShopsController < ApplicationController
   before_action :require_login, except: [:index, :show, :photos]
 
   def index
-    @q = params[:q].to_s
-    @sort = params[:sort].to_s
-    scope = Shop.all
-    scope = scope.where("name LIKE ? OR area LIKE ?", "%#{@q}%", "%#{@q}%") if @q.present?
-    scope =
-      case @sort
-      when "new" then scope.order(created_at: :desc)
-      when "old" then scope.order(created_at: :asc)
-      else scope.order(created_at: :desc)
-      end
-    @shops = scope
-    @shops = Shop.all
-  end
+  @q = params[:q].to_s
+  @sort = params[:sort].to_s
+
+  scope = Shop.all
+  scope = scope.where(
+    "name LIKE ? OR area LIKE ? OR address LIKE ?",
+    "%#{@q}%", "%#{@q}%", "%#{@q}%"
+  ) if @q.present?
+
+  scope =
+    case @sort
+    when "new" then scope.order(created_at: :desc)
+    when "old" then scope.order(created_at: :asc)
+    else scope.order(created_at: :desc)
+    end
+
+  @shops = scope
+
+  @pickup_shops = Shop
+    .joins(:menu_photos_attachments)
+    .includes(menu_photos_attachments: :blob)
+    .distinct
+    .order(Arel.sql("RANDOM()"))
+    .limit(5)
+end
   def show
     @reviews = @shop.reviews.includes(:user).order(created_at: :desc)
      @shop = Shop.find(params[:id])
   end
+  
   def new
     @shop = Shop.new
   end
@@ -47,22 +60,21 @@ class ShopsController < ApplicationController
     @shop.destroy
     redirect_to shops_path, notice: "店舗を削除しました"
   end
-
-
+ def photos
+  @photos = ActiveStorage::Attachment
+    .includes(:record, :blob)
+    .where(record_type: "Shop", name: "menu_photos")
+    .order(created_at: :desc)
+end
+private
   def set_shop
     @shop = Shop.find(params[:id])
   end
 
  def shop_params
   params.require(:shop).permit(
-    :name, :address, :business_hours, :closed_days, :access, :notes, :building_photo,
+    :name, :area, :address, :business_hours, :closed_days, :access, :notes, :building_photo,
     menu_photos: []
   )
-end
- def photos
-  @photos = ActiveStorage::Attachment
-    .includes(:record, :blob)
-    .where(record_type: "Shop", name: "menu_photos")
-    .order(created_at: :desc)
 end
 end

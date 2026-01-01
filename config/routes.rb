@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  root "shops#index"
-
+ root "home#index"
   # 認証
   get    "/signup", to: "users#new"
   post   "/signup", to: "users#create"
