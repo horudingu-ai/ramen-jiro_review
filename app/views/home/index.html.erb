@@ -1,5 +1,4 @@
-<h1>Pick up</h1>
-
+<h1>Pick up ラーメン</h1>
 <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:16px;">
   <% @pickup_shops.each do |shop| %>
     <% photo = shop.menu_photos.first %>
@@ -16,6 +15,46 @@
     </div>
   <% end %>
 </div>
+<h2>新着店舗</h2>
+<ul>
+  <% @new_shops.each do |shop| %>
+    <% photo = shop.menu_photos.first %>
 
-<p><%= link_to "店舗一覧を見る", shops_path %></p>
-
+    <li style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+      <!-- 店舗名 -->
+      <div style="flex:1;">
+        <%= link_to shop.name, shop_path(shop), style: "font-weight:600;" %><br>
+        <small><%= shop.address %></small>
+      </div>
+      <!-- ラーメン写真（右） -->
+      <% if photo.present? %>
+     <%= link_to shop_path(shop) do %>
+        <%= image_tag photo,
+          style: "width:80px; height:60px; object-fit:cover; border-radius:6px;" %>
+      <% end %>
+      <% end %>
+    </li>
+    </li>
+  <% end %>
+</ul>
+<h3>口コミ新着店舗</h3>
+<ul>
+  <% @recent_review_shops.each do |shop| %>
+    <% photo = shop.menu_photos.first %>
+      <li style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+      <!-- 店舗名 -->
+      <div style="flex:1;">
+        <%= link_to shop.name, shop_path(shop), style: "font-weight:600;" %><br>
+        <small><%= shop.address %></small>
+      </div>
+      <!-- ラーメン写真（右） -->
+      <% if photo.present? %>
+   <%= link_to shop_path(shop) do %>
+        <%= image_tag photo,
+          style: "width:80px; height:60px; object-fit:cover; border-radius:6px;" %>
+      <% end %>
+      <% end %>
+    </li>
+    </li>
+  <% end %>
+</ul>

@@ -19,23 +19,17 @@
 
  <div class="header-right">
   <!-- 未ログインでも見せたい機能（常に表示） -->
-  
-
-  <%= form_with url: shops_path, method: :get, local: true, class: "header-search" do |f| %>
-    <%= f.search_field :keyword, value: params[:keyword], placeholder: "店名で検索", class: "search-input" %>
-    <%= f.submit "検索", class: "btn" %>
-  <% end %>
-
   <div class="dropdown">
     <button class="dropdown-trigger" type="button">
       メニュー ▼
     </button>
 
     <div class="dropdown-menu">
+    <%= link_to "アカウント情報", account_path, class: "dropdown-item" %>
       <%= link_to "店舗一覧", shops_path, class: "dropdown-item" %>
       <%# 未ログインでも見せるなら new_shop_path もここに残す %>
       <%= link_to '新規店舗登録', new_shop_path, class: "dropdown-item" %>
-     <%= link_to "写真一覧", photos_shops_path, class: "dropdown-item" %>
+    <%= link_to "写真一覧", photos_path, class: "dropdown-item" %>
     </div>
   </div>
 

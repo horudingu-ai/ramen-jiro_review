@@ -13,7 +13,9 @@ class UsersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
+ def account
+    @user = current_user
+  end
   private
 
   def user_params
