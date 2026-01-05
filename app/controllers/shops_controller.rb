@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
-  before_action :require_login, except: [:index, :show, :photos]
+ before_action :require_login, only: [:new, :create]
 
   def index
   @q = params[:q].to_s
@@ -29,9 +29,8 @@ class ShopsController < ApplicationController
     .limit(5)
 end
   def show
-    @reviews = @shop.reviews.includes(:user).order(created_at: :desc)
-     @shop = Shop.find(params[:id])
-  end
+  @reviews = @shop.reviews.includes(:user).order(created_at: :desc)
+end
   
   def new
     @shop = Shop.new

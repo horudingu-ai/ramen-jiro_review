@@ -103,3 +103,22 @@
 .dropdown-item.danger{
   color: #c00;
 }
+.star-rating {
+  display: inline-flex;
+  gap: 6px;
+  user-select: none;
+}
+
+.star-rating .star {
+  font-size: 28px;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #cfcfcf; /* 未選択 */
+}
+
+.star-rating .star.is-on {
+  color: #f5b301; /* 選択済み */
+}

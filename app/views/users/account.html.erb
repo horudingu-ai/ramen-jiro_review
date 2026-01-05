@@ -1,8 +1,21 @@
-<h1>アカウント</h1>
+<h1>アカウント情報</h1>
 
-<p>名前：<%= @user.name %></p>
-<p>メール：<%= @user.email %></p>
-
-<p>
-  <%= link_to "プロフィール編集", edit_user_path(@user) %>
-</p>
+<p>名前：<%= @user&.name %></p>
+<p>メール：<%= @user&.email %></p>
+<p>年齢：<%= age_range(@user.age) %></p>
+<p>性別: <%= @user&.gender %></p>     
+<p>居住地: <%= @user&.location %></p>
+<div>
+  <% if @user && @user.icon.attached? %>
+    <%= image_tag @user.icon,
+      style: "width:80px; height:80px; object-fit:cover; border-radius:50%;" %>
+  <% else %>
+    <%= image_tag "default_user.png",
+      style: "width:80px; height:80px; object-fit:cover; border-radius:50%;" %>
+  <% end %>
+</div>
+<% if @user %>
+  <p>
+   <%= link_to "プロフィール編集", edit_user_path(current_user) if current_user %>
+  </p>
+<% end %>

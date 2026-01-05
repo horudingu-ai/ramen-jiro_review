@@ -10,47 +10,42 @@
   </head>
 
   <body>
-   <header class="site-header">
-  <div class="logo">
-    <%= link_to root_path do %>
-      <%= image_tag "logo.png", alt: "JIRO REVIEW", class: "logo-image" %>
-    <% end %>
-  </div>
+    <header class="site-header">
+      <div class="logo">
+        <%= link_to root_path do %>
+          <%= image_tag "logo.png", alt: "JIRO REVIEW", class: "logo-image" %>
+        <% end %>
+      </div>
 
- <div class="header-right">
-  <!-- 未ログインでも見せたい機能（常に表示） -->
-  <div class="dropdown">
-    <button class="dropdown-trigger" type="button">
-      メニュー ▼
-    </button>
+      <div class="header-right">
+        <div class="dropdown">
+          <button class="dropdown-trigger" type="button">メニュー ▼</button>
 
-    <div class="dropdown-menu">
-    <%= link_to "アカウント情報", account_path, class: "dropdown-item" %>
-      <%= link_to "店舗一覧", shops_path, class: "dropdown-item" %>
-      <%# 未ログインでも見せるなら new_shop_path もここに残す %>
-      <%= link_to '新規店舗登録', new_shop_path, class: "dropdown-item" %>
-    <%= link_to "写真一覧", photos_path, class: "dropdown-item" %>
-    </div>
-  </div>
+          <div class="dropdown-menu">
+            <% if logged_in? %>
+              <%= link_to "アカウント情報", account_path, class: "dropdown-item" %>
+            <% end %>
+            <%= link_to "店舗一覧", shops_path, class: "dropdown-item" %>
+            <%= link_to "新規店舗登録", new_shop_path, class: "dropdown-item" %>
+            <%= link_to "写真一覧", photos_shops_path, class: "dropdown-item" %>
+          </div>
+        </div>
 
-  <!-- 未ログインのときだけ「ログイン / 新規登録」 -->
-  <% unless logged_in? %>
-    <nav class="header-nav">
-      <%= link_to "ログイン", login_path, class: "btn" %>
-      <%= link_to "新規登録", signup_path, class: "btn" %>
-    </nav>
-  <% end %>
+        <% unless logged_in? %>
+          <nav class="header-nav">
+            <%= link_to "ログイン", login_path, class: "btn" %>
+            <%= link_to "新規登録", signup_path, class: "btn" %>
+          </nav>
+        <% end %>
 
-  <!-- ログインしてるときだけログアウトを出したい場合 -->
-  <% if logged_in? %>
-    <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "btn" %>
-  <% end %>
-</div>
+        <% if logged_in? %>
+          <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "btn" %>
+        <% end %>
+      </div>
+    </header>
 
-
-</header>
     <main class="container">
       <%= yield %>
     </main>
-</body>
+  </body>
 </html>

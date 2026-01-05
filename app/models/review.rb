@@ -1,5 +1,5 @@
 class Review < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true 
   belongs_to :shop
   has_many_attached :images
   validates :rating, inclusion: { in: 1..5 }

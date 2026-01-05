@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
   def require_login
+    unless logged_in?
+    session[:return_to] = request.fullpath
     redirect_to login_path, alert: "ログインしてください" unless logged_in?
   end
+end
 end

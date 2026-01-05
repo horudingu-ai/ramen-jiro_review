@@ -24,10 +24,22 @@
   <%= f.label :age, "年齢（任意）" %><br>
   <%= f.number_field :age, min: 1, max: 120, placeholder: "例）25" %>
 </div>
-  <div>
-    <%= f.label :rating, "評価(1〜5)" %><br>
-    <%= f.number_field :rating, in: 1..5 %>
+  <div class="field">
+  <label>評価</label>
+
+  <!-- 送信される値 -->
+  <%= f.hidden_field :rating, id: "review_rating" %>
+
+  <!-- ★ UI -->
+  <div class="star-rating" data-max="5" data-input-id="review_rating">
+    <% 5.times do |i| %>
+      <button type="button" class="star" data-value="<%= i + 1 %>" aria-label="<%= i + 1 %> stars">★</button>
+    <% end %>
   </div>
+
+  <small class="hint">★をクリックして評価してください</small>
+</div>
+
 
   <div>
     <%= f.label :visit_date, "来店日" %><br>
