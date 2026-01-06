@@ -16,7 +16,7 @@
           <%= image_tag "logo.png", alt: "JIRO REVIEW", class: "logo-image" %>
         <% end %>
       </div>
-
+      <p class="header-title">全国のラーメン二郎を、口コミで探そう。</p>
       <div class="header-right">
         <div class="dropdown">
           <button class="dropdown-trigger" type="button">メニュー ▼</button>
@@ -47,5 +47,16 @@
     <main class="container">
       <%= yield %>
     </main>
+    <script>
+  // callback が先に呼ばれても落ちない保険
+  window.initMap = window.initMap || function () {};
+</script>
+
+<script
+  async
+  defer
+  data-turbo-track="reload"
+  src="https://maps.googleapis.com/maps/api/js?key=...&callback=initMap&libraries=marker&loading=async">
+</script>
   </body>
 </html>

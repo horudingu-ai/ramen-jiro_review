@@ -1,42 +1,39 @@
-.site-header{
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #fff;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 16px;
+/*
+ *= require_tree .
+ *= require_self
+ */
+/* application.css */
+/* ヘッダー全体のスタイル */
+.site-header{ display: grid;
+  grid-template-columns: 1fr auto 1fr; /* 左・中央・右を均等に */
+  align-items: center; }
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
+/*ロゴ ラーメン二郎レビュー*/
 .logo-image{
-  height: 40px;
+  height: 200px;
   width: auto;
   display: block;
+  justify-self: start;
 }
-
+/* ドロップダウンメニュー、新規登録/ログイン/ログアウト */
 .header-right{
+  margin-left: auto;         
   display: flex;
   align-items: center;
+  gap: 12px;                   
+}
+/* ヘッダーのタイトル */
+.header-title{
+  font-size: 25px;
+  font-weight: bold;
+  align-items: center;
+}
+/* ログイン/新規登録を横並びに */
+.header-nav{
+  display: flex;
+  text-align: center;
   gap: 10px;
 }
-
-.header-search{
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.search-input{
-  height: 34px;
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
 .btn{
   display: inline-flex;
   align-items: center;
@@ -103,6 +100,8 @@
 .dropdown-item.danger{
   color: #c00;
 }
+
+
 .star-rating {
   display: inline-flex;
   gap: 6px;

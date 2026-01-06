@@ -9,10 +9,31 @@
 <% end %>
 <ul>
   <% @shops.each do |shop| %>
-    <li>
-      <%= link_to shop.name, shop_path(shop) %>（<%= shop.area %>）
-    </li>
-  <% end %>
+  <div style="display:flex; gap:12px; padding:10px 0; border-bottom:1px solid #eee;">
+    <div>
+      <%# 写真：メニュー写真有、先頭、無、建物写真、無、テキスト %>
+      <% if shop.menu_photos.attached? %>
+        <%= image_tag shop.menu_photos.first,
+          style: "width:80px; height:80px; object-fit:cover; border-radius:8px;" %>
+      <% elsif shop.building_photo.attached? %>
+        <%= image_tag shop.building_photo,
+          style: "width:80px; height:80px; object-fit:cover; border-radius:8px;" %>
+      <% else %>
+        <div style="width:80px; height:80px; background:#f2f2f2; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+          画像なし
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <div>
+        <%= link_to shop.name, shop_path(shop), style: "font-weight:bold; font-size:18px;" %>
+      </div>
+      <div style="color:#666; margin-top:4px;">
+        <%= shop.address %>
+      </div>
+    </div>
+  </div>
+<% end %>
 </ul>
 
    

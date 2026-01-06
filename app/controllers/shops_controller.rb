@@ -18,8 +18,7 @@ class ShopsController < ApplicationController
     when "old" then scope.order(created_at: :asc)
     else scope.order(created_at: :desc)
     end
-
-  @shops = scope
+@shops = scope.with_attached_building_photo.with_attached_menu_photos
 
   @pickup_shops = Shop
     .joins(:menu_photos_attachments)

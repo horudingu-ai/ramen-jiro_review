@@ -3,6 +3,17 @@
 
 <p><%= link_to "口コミを書く", new_shop_review_path(@shop) %></p>
 <h1><%= @shop.name %></h1>
+<% avg = @shop.reviews.average(:rating)&.to_f %>
+<% count = @shop.reviews.count %>
+<p class="shop-rating">
+  <% if count > 0 %>
+    <span class="stars"><%= "★" * avg.round %><%= "☆" * (5 - avg.round) %></span>
+    <span class="avg"><%= format("%.1f", avg) %></span>
+    <span class="count">（<%= count %>件）</span>
+  <% else %>
+    <span class="no-review">評価なし（0件）</span>
+  <% end %>
+</p>
 <p>住所：<%= @shop.address %></p>
 <p>営業時間：<%= @shop.business_hours %></p>
 <p>定休日：<%= @shop.closed_days %></p>
@@ -44,5 +55,38 @@
         <% end %>
       </div>
     <% end %>
+    <h3>地図</h3>
+<div id="map" style="width:100%; height:320px; border:1px solid #ddd;"></div>
+
+<script>
+  window.initMap = function () {
+    const el = document.getElementById("map");
+    if (!el) return;
+
+    const address = "<%= j(@shop.address.to_s) %>";
+    const fallback = { lat: 35.681236, lng: 139.767125 };
+
+    const map = new google.maps.Map(el, { center: fallback, zoom: 15 });
+
+    const putMarker = (pos) => new google.maps.marker.AdvancedMarkerElement({
+      map, position: pos
+    });
+
+    const geocoder = new google.maps.Geocoder();
+
+    if (!address) return putMarker(fallback);
+
+    geocoder.geocode({ address: address + " 日本" }, (results, status) => {
+      if (status === "OK" && results?.[0]) {
+        const loc = results[0].geometry.location;
+        map.setCenter(loc);
+        putMarker(loc);
+      } else {
+        console.log("Geocode failed:", status, "address:", address);
+        putMarker(fallback);
+      }
+    });
+  };
+</script>
   </div>
 <% end %>
