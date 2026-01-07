@@ -4,9 +4,11 @@
     <title>JIRO REVIEW</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+<%= stylesheet_link_tag "home", "data-turbo-track": "reload" %>
+<%= stylesheet_link_tag "shop", "data-turbo-track": "reload" %>
+<%= stylesheet_link_tag "user", "data-turbo-track": "reload" %>
+<%= javascript_importmap_tags %>
   </head>
 
   <body>
@@ -47,16 +49,5 @@
     <main class="container">
       <%= yield %>
     </main>
-    <script>
-  // callback が先に呼ばれても落ちない保険
-  window.initMap = window.initMap || function () {};
-</script>
-
-<script
-  async
-  defer
-  data-turbo-track="reload"
-  src="https://maps.googleapis.com/maps/api/js?key=...&callback=initMap&libraries=marker&loading=async">
-</script>
   </body>
 </html>

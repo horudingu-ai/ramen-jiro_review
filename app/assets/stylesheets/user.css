@@ -1,0 +1,65 @@
+.page-title{
+  font-size:22px;
+  font-weight:800;
+  margin: 10px 0 16px;
+}
+
+.account-card{
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:16px;
+  background:#fff;
+  max-width:520px;
+}
+
+.account-row{
+  display:flex;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid #f1f1f1;
+}
+
+.account-row:last-child{
+  border-bottom:none;
+}
+
+.account-label{
+  width:90px;
+  color:#666;
+  font-size:14px;
+  flex: 0 0 auto;
+}
+
+.account-value{
+  font-size:15px;
+  font-weight:600;
+  min-width:0;
+}
+
+.account-avatar{
+  margin-top:14px;
+  display:flex;
+  justify-content:flex-start;
+}
+
+.avatar-img{
+  width:80px;
+  height:80px;
+  object-fit:cover;
+  border-radius:50%;
+  border:1px solid #eee;
+}
+
+.account-actions{
+  margin-top:16px;
+}
+
+.btn-primary{
+  display:inline-block;
+  padding:10px 12px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  background:#000;
+  color:#fff;
+}

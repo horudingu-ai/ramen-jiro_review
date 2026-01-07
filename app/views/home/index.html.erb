@@ -1,62 +1,68 @@
 <h1 class="section-title">Pick up ラーメン</h1>
 
-<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:16px;">
+<div class="pickup-grid">
   <% @pickup_shops.each do |shop| %>
     <% photo = shop.menu_photos.first %>
 
-    <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
-      <%= link_to shop_path(shop), style: "text-decoration:none; color:inherit;" do %>
-        <div style="aspect-ratio:4/3; overflow:hidden; border-radius:8px;">
+    <div class="pickup-card">
+      <%= link_to shop_path(shop), class: "pickup-link" do %>
+        <div class="pickup-image">
           <% if photo.present? %>
-            <%= image_tag photo, style: "width:100%; height:100%; object-fit:cover;" %>
+            <%= image_tag photo %>
+          <% else %>
+            <div class="no-image">画像なし</div>
           <% end %>
         </div>
 
-        <strong><%= shop.name %></strong><br>
-        <small>📍<%= shop.address %></small>
+        <strong class="pickup-name"><%= shop.name %></strong><br>
+        <small class="pickup-address">📍<%= shop.address %></small>
       <% end %>
     </div>
   <% end %>
 </div>
-<h2>新着店舗</h2>
+<div class="home-two-cols">
+  <section class="home-col">
+    <h2 class="home-subtitle">新着店舗</h2>
+    <ul class="mini-list">
+      <% @new_shops.each do |shop| %>
+        <% photo = shop.menu_photos.first %>
 
-<ul style="list-style:none; padding:0;">
-  <% @new_shops.each do |shop| %>
-    <% photo = shop.menu_photos.first %>
+        <li class="mini-item">
+          <div class="mini-text">
+            <%= link_to shop.name, shop_path(shop), class: "mini-name" %>
+            <small class="mini-address">📍<%= shop.address %></small>
+          </div>
 
-    <li style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-      <div style="flex:1;">
-        <%= link_to shop.name, shop_path(shop), style: "font-weight:600;" %><br>
-        <small>📍<%= shop.address %></small>
-      </div>
-
-      <% if photo.present? %>
-        <%= link_to shop_path(shop) do %>
-          <%= image_tag photo,
-            style: "width:80px; height:60px; object-fit:cover; border-radius:6px;" %>
-        <% end %>
+          <div class="mini-thumb">
+            <% if photo.present? %>
+              <%= link_to shop_path(shop) do %>
+                <%= image_tag photo %>
+              <% end %>
+            <% end %>
+          </div>
+        </li>
       <% end %>
-    </li>
-  <% end %>
-</ul>
-<h3>口コミ新着店舗</h3>
-
-<ul style="list-style:none; padding:0;">
-  <% @recent_review_shops.each do |shop| %>
-    <% photo = shop.menu_photos.first %>
-
-    <li style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-      <div style="flex:1;">
-        <%= link_to shop.name, shop_path(shop), style: "font-weight:600;" %><br>
-        <small>📍<%= shop.address %></small>
-      </div>
-
-      <% if photo.present? %>
-        <%= link_to shop_path(shop) do %>
-          <%= image_tag photo,
-            style: "width:80px; height:60px; object-fit:cover; border-radius:6px;" %>
-        <% end %>
+    </ul>
+  </section>
+  <section class="home-col">
+    <h3 class="home-subtitle">口コミ新着店舗</h3>
+    <ul class="mini-list">
+      <% @recent_review_shops.each do |shop| %>
+        <% photo = shop.menu_photos.first %>
+        <li class="mini-item">
+          <div class="mini-text">
+            <%= link_to shop.name, shop_path(shop), class: "mini-name" %>
+            <small class="mini-address">📍<%= shop.address %></small>
+          </div>
+          <div class="mini-thumb">
+            <% if photo.present? %>
+              <%= link_to shop_path(shop) do %>
+                <%= image_tag photo %>
+              <% end %>
+            <% end %>
+          </div>
+        </li>
       <% end %>
-    </li>
-  <% end %>
-</ul>
+    </ul>
+  </section>
+</div>

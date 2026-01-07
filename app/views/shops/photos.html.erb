@@ -1,18 +1,18 @@
 <h1>写真一覧</h1>
-
-<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:16px;">
+<div class="photos-grid">
   <% @photos.each do |photo| %>
     <% shop = photo.record %>
-    <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
-      <%= link_to shop_path(shop), style: "text-decoration:none; color:inherit;" do %>
-        <div style="aspect-ratio: 4 / 3; overflow:hidden; border-radius:10px;">
-          <%= image_tag photo, style: "width:100%; height:100%; object-fit:cover;" %>
+    <div class="photo-card">
+      <%= link_to shop_path(shop), class: "photo-link" do %>
+        <div class="photo-thumb">
+          <%= image_tag photo %>
         </div>
-        <div style="margin-top:10px; font-weight:700;">
-          <%= shop.name %><br>
-          <%= shop.address %><td>
+        <div class="photo-meta">
+          <div class="photo-shop-name"><%= shop.name %></div>
+          <div class="photo-shop-address">📍 <%= shop.address %></div>
         </div>
       <% end %>
     </div>
   <% end %>
 </div>
+
