@@ -22,7 +22,7 @@
 </div>
 <div class="home-two-cols">
   <section class="home-col">
-    <h2 class="home-subtitle">新着店舗</h2>
+    <h2 class="home-subtitle1">新着店舗</h2>
     <ul class="mini-list">
       <% @new_shops.each do |shop| %>
         <% photo = shop.menu_photos.first %>
@@ -34,18 +34,20 @@
           </div>
 
           <div class="mini-thumb">
-            <% if photo.present? %>
-              <%= link_to shop_path(shop) do %>
-                <%= image_tag photo %>
-              <% end %>
-            <% end %>
-          </div>
+  <%= link_to shop_path(shop) do %>
+    <% if photo.present? %>
+      <%= image_tag photo %>
+    <% else %>
+      <div class="no-image">画像無し</div>
+    <% end %>
+  <% end %>
+</div>
         </li>
-      <% end %>
+    <% end %> 
     </ul>
   </section>
   <section class="home-col">
-    <h3 class="home-subtitle">口コミ新着店舗</h3>
+    <h3 class="home-subtitle2">口コミ新着店舗</h3>
     <ul class="mini-list">
       <% @recent_review_shops.each do |shop| %>
         <% photo = shop.menu_photos.first %>
@@ -55,12 +57,14 @@
             <small class="mini-address">📍<%= shop.address %></small>
           </div>
           <div class="mini-thumb">
-            <% if photo.present? %>
-              <%= link_to shop_path(shop) do %>
-                <%= image_tag photo %>
-              <% end %>
-            <% end %>
-          </div>
+  <%= link_to shop_path(shop) do %>
+    <% if photo.present? %>
+      <%= image_tag photo %>
+    <% else %>
+      <div class="no-image">画像無し</div>
+    <% end %>
+  <% end %>
+</div>
         </li>
       <% end %>
     </ul>

@@ -15,6 +15,7 @@
   <% @shops.each do |shop| %>
     <li class="shop-item">
       <div class="shop-image">
+      <%= link_to shop_path(shop) do %>
         <% if shop.menu_photos.attached? %>
           <%= image_tag shop.menu_photos.first %>
         <% elsif shop.building_photo.attached? %>
@@ -22,6 +23,7 @@
         <% else %>
           <div class="no-image">画像なし</div>
         <% end %>
+       <% end %>
       </div>
 
       <div class="shop-info">

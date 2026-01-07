@@ -1,92 +1,74 @@
 <!-- 店舗詳細ページ -->
-<p><%= simple_format(@shop.description) %></p>
-
-<p><%= link_to "口コミを書く", new_shop_review_path(@shop) %></p>
-<h1><%= @shop.name %></h1>
-<% avg = @shop.reviews.average(:rating)&.to_f %>
-<% count = @shop.reviews.count %>
-<p class="shop-rating">
-  <% if count > 0 %>
-    <span class="stars"><%= "★" * avg.round %><%= "☆" * (5 - avg.round) %></span>
-    <span class="avg"><%= format("%.1f", avg) %></span>
-    <span class="count">（<%= count %>件）</span>
-  <% else %>
-    <span class="no-review">評価なし（0件）</span>
-  <% end %>
-</p>
-<p>住所：<%= @shop.address %></p>
-<p>営業時間：<%= @shop.business_hours %></p>
-<p>定休日：<%= @shop.closed_days %></p>
-<p>アクセス：<br><%= simple_format(@shop.access) %></p>
-<p>備考：<br><%= simple_format(@shop.notes) %></p>
-<hr>
-<h2>建物の写真</h2>
-<% if @shop.building_photo.attached? %>
-  <%= image_tag @shop.building_photo, style: "max-width: 400px; height: auto;" %>
-<% else %>
-  <p>未登録</p>
-<% end %>
-<h2>メニュー写真</h2>
-<% if @shop.menu_photos.attached? %>
-  <% @shop.menu_photos.each do |photo| %>
-    <%= image_tag photo, style: "max-width: 300px; height: auto; margin: 6px;" %>
-  <% end %>
-<% else %>
-  <p>未登録</p>
-<% end %>
-
-<h2>口コミ</h2>
-<% @reviews.each do |r| %>
-  <div style="border:1px solid #ddd; padding:10px; margin:10px 0;">
-    <p>
-      <strong><%= r.author_name.presence || r.user&.name || "guest" %></strong>
-      <span><%= stars(r.rating) %>（<%= r.rating %>）</span>
-      <% if r.visit_date.present? %>
-        / <%= r.visit_date %>
+<div class="shop-show">
+  <h1 class="shop-name"><%= @shop.name %></h1>
+  <% avg = @shop.reviews.average(:rating)&.to_f %>
+  <% count = @shop.reviews.count %>
+  <div class="shop-rating">
+    <% if count > 0 %>
+      <span class="stars"><%= "★" * avg.round %><%= "☆" * (5 - avg.round) %></span>
+      <span class="avg"><%= format("%.1f", avg) %></span>
+      <span class="count">（<%= count %>件）</span>
+    <% else %>
+      <span class="no-review">評価なし（0件）</span>
+    <% end %>
+  </div>
+  <!-- 上段：写真＋店舗情報 -->
+  <div class="shop-main">
+    <!-- 左：写真 -->
+    <div class="shop-photos">
+      <h2>建物の写真</h2>
+      <% if @shop.building_photo.attached? %>
+        <%= image_tag @shop.building_photo, class: "main-photo" %>
+      <% else %>
+        <p>未登録</p>
       <% end %>
-    </p>
 
-    <p><%= simple_format(r.body) %></p>
+      <h2>メニュー写真</h2>
+      <div class="menu-photos">
+        <% if @shop.menu_photos.attached? %>
+          <% @shop.menu_photos.each do |photo| %>
+            <%= image_tag photo, class: "menu-photo" %>
+          <% end %>
+        <% else %>
+          <p>未登録</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="shop-info-card">
+      <ul>
+        <li><strong>住所</strong><br><%= @shop.address %></li>
+        <li><strong>営業時間</strong><br><%= @shop.business_hours %></li>
+        <li><strong>定休日</strong><br><%= @shop.closed_days %></li>
+        <li><strong>アクセス</strong><br><%= simple_format(@shop.access) %></li>
+        <li><strong>備考</strong><br><%= simple_format(@shop.notes) %></li>
+      </ul>
+    </div>
+  </div>
+  <div class="shop-description">
+    <%= simple_format(@shop.description) %>
+  </div>
+  <div class="reviews">
+    <h2>口コミ</h2>
+    <%= link_to "口コミを書く", new_shop_review_path(@shop), class: "review-btn" %>
 
-    <% if r.images.attached? %>
-      <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <% r.images.each do |img| %>
-          <%= image_tag img, style: "width:160px; height:160px; object-fit:cover;" %>
+    <% @reviews.each do |r| %>
+      <div class="review-card">
+        <p class="review-header">
+          <strong><%= r.author_name.presence || r.user&.name || "guest" %></strong>
+          <span><%= stars(r.rating) %>（<%= r.rating %>）</span>
+          <% if r.visit_date.present? %>
+            / <%= r.visit_date %>
+          <% end %>
+        </p>
+        <p><%= simple_format(r.body) %></p>
+        <% if r.images.attached? %>
+          <div class="review-images">
+            <% r.images.each do |img| %>
+              <%= image_tag img %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     <% end %>
-    <h3>地図</h3>
-<div id="map" style="width:100%; height:320px; border:1px solid #ddd;"></div>
-
-<script>
-  window.initMap = function () {
-    const el = document.getElementById("map");
-    if (!el) return;
-
-    const address = "<%= j(@shop.address.to_s) %>";
-    const fallback = { lat: 35.681236, lng: 139.767125 };
-
-    const map = new google.maps.Map(el, { center: fallback, zoom: 15 });
-
-    const putMarker = (pos) => new google.maps.marker.AdvancedMarkerElement({
-      map, position: pos
-    });
-
-    const geocoder = new google.maps.Geocoder();
-
-    if (!address) return putMarker(fallback);
-
-    geocoder.geocode({ address: address + " 日本" }, (results, status) => {
-      if (status === "OK" && results?.[0]) {
-        const loc = results[0].geometry.location;
-        map.setCenter(loc);
-        putMarker(loc);
-      } else {
-        console.log("Geocode failed:", status, "address:", address);
-        putMarker(fallback);
-      }
-    });
-  };
-</script>
   </div>
-<% end %>
+</div>

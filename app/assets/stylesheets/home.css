@@ -57,9 +57,43 @@
     grid-template-columns:1fr;
   }
 }
-.home-subtitle{
+/* 新着店舗 */
+.home-subtitle1{
+   position: relative;   
   margin: 10px 0 12px;
+   padding-left: 12px;
+   font-size: 25px;
 }
+/* 口コミ新着店舗 */
+.home-subtitle2{
+   position: relative;   
+  margin: 10px 0 12px;
+   padding-left: 12px;
+   font-size: 25px;
+}
+/* 新着店舗のピンクライン */
+.home-subtitle1:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:4px;
+  height:100%;
+  background:pink;
+  border-radius:2px;
+}
+/* 口コミ新着店舗のスカイブルーライン */
+.home-subtitle2:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:4px;
+  height:100%;
+  background:skyblue;
+  border-radius:2px;
+}
+
 .mini-list{
   list-style:none;
   padding:0;
@@ -78,21 +112,36 @@
 .mini-text{
   min-width:0;
 }
-
+/*新着店舗、口コミ新着店舗の名前*/
 .mini-name{
   font-weight:600;
   text-decoration:none;
   color:#000;
+  cursor: pointer;
 }
+/*新着店舗、口コミ新着店舗の住所*/
 .mini-address{
   display:block;
   margin-top:4px;
-  color:#666;
+  color:red;
 }
+/*口コミ新着店舗の画像/index*/
 .mini-thumb img{
   width:80px;
   height:60px;
   object-fit:cover;
   border-radius:6px;
   display:block;
+}
+/*口コミ新着店舗の画像が無い場合/index*/
+.no-image {
+  width: 80px;
+  height: 80px;
+  background: #eee;
+  color: #999;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
 }

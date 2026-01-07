@@ -1,8 +1,8 @@
 <h1>新規登録</h1>
 <%= form_with model: @user, url: signup_path, local: true do |f| %>
-  <div><%= f.label :name %><br><%= f.text_field :name %></div>
-  <div><%= f.label :email %><br><%= f.email_field :email %></div>
-  <div><%= f.label :password %><br><%= f.password_field :password %></div>
-  <div><%= f.label :password_confirmation %><br><%= f.password_field :password_confirmation %></div>
+  <div><%= f.label :名前 %><br><%= f.text_field :name %></div>
+  <div><%= f.label :メールアドレス %><br><%= f.email_field :email %></div>
+  <div><%= f.label :パスワード %><br><%= f.password_field :password %></div>
+  <div><%= f.label :パスワード確認 %><br><%= f.password_field :password_confirmation %></div>
   <%= f.submit "登録" %>
 <% end %>
