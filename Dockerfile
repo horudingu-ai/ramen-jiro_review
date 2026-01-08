@@ -72,6 +72,6 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 80
 CMD ["./bin/thrust", "./bin/rails", "server"]
-
+ENV BUNDLE_PATH=/usr/local/bundle
 ENV PATH="/usr/local/bundle/bin:${PATH}"
 WORKDIR /rails
