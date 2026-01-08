@@ -75,3 +75,4 @@ CMD ["./bin/thrust", "./bin/rails", "server"]
 ENV BUNDLE_PATH=/usr/local/bundle
 ENV PATH="/usr/local/bundle/bin:${PATH}"
 WORKDIR /rails
+CMD ["bash", "-lc", "bundle exec rails db:prepare && bundle exec rails server -b 0.0.0.0 -p ${PORT:-10000}"]
