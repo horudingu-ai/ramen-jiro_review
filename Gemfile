@@ -73,5 +73,4 @@ end
 group :production do
   gem "pg"
 end
-ENV PATH="/usr/local/bundle/bin:${PATH}"
-WORKDIR /rails
+
