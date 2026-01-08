@@ -54,8 +54,6 @@ RUN bundle exec bootsnap precompile -j 1 app/ lib/
 RUN chmod +x bin/rails
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-
-
 # Final stage for app image
 FROM base
 
