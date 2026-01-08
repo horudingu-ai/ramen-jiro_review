@@ -1,42 +1,74 @@
 <h1 class="page-title">アカウント情報</h1>
 
-<div class="account-card">
-  <div class="account-row">
-    <div class="account-label">名前</div>
-    <div class="account-value"><%= @user&.name %></div>
-  </div>
+<section class="account-card">
+  <!-- 上段：アイコン + 名前/タグ + 編集ボタン -->
+  <div class="account-top">
+    <div class="account-avatar">
+      <% if @user&.icon&.attached? %>
+        <%= image_tag @user.icon, class: "avatar-img" %>
+      <% else %>
+        <%= image_tag "default_user.png", class: "avatar-img" %>
+      <% end %>
+    </div>
 
-  <div class="account-row">
-    <div class="account-label">メール</div>
-    <div class="account-value"><%= @user&.email %></div>
-  </div>
+    <div class="account-profile">
+      <div class="account-name-row">
+        <div class="account-name"><%= @user&.name %></div>
+      </div>
 
-  <div class="account-row">
-    <div class="account-label">年齢</div>
-    <div class="account-value"><%= age_range(@user.age) %></div>
-  </div>
+      <div class="account-badges">
+        <span class="badge badge-yellow">ラーメン愛好家</span>
+        <% if @user&.location.present? %>
+          <span class="badge badge-gray">📍 <%= @user.location %></span>
+        <% end %>
+      </div>
+    </div>
 
-  <div class="account-row">
-    <div class="account-label">性別</div>
-    <div class="account-value"><%= @user&.gender %></div>
-  </div>
-
-  <div class="account-row">
-    <div class="account-label">居住地</div>
-    <div class="account-value"><%= @user&.location %></div>
-  </div>
-
-  <div class="account-avatar">
-    <% if @user&.icon&.attached? %>
-      <%= image_tag @user.icon, class: "avatar-img" %>
-    <% else %>
-      <%= image_tag "default_user.png", class: "avatar-img" %>
+    <% if current_user %>
+      <div class="account-actions">
+        <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn-edit" %>
+      </div>
     <% end %>
   </div>
 
-  <% if current_user %>
-    <div class="account-actions">
-      <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn-primary" %>
+  <hr class="account-divider">
+
+  <!-- 下段：2カラムの情報 -->
+  <div class="account-details">
+    <div class="detail">
+      <div class="detail-label">メールアドレス</div>
+      <div class="detail-value"><%= @user&.email %></div>
     </div>
-  <% end %>
-</div>
+
+    <div class="detail">
+      <div class="detail-label">性別</div>
+      <div class="detail-value">
+        <% if @user&.gender == "male" %>
+          男
+        <% elsif @user&.gender == "female" %>
+          女
+        <% else %>
+          未設定
+        <% end %>
+      </div>
+    </div>
+
+    <div class="detail">
+      <div class="detail-label">年齢</div>
+      <div class="detail-value"><%= age_range(@user.age) %></div>
+    </div>
+
+    <div class="detail">
+      <div class="detail-label">居住地</div>
+      <div class="detail-value"><%= @user&.location.presence || "未設定" %></div>
+    </div>
+  </div>
+</section>
+
+<section class="recent-card">
+  <div class="recent-title">最近の活動</div>
+  <div class="recent-empty">
+    <div class="recent-icon">📝</div>
+    <div class="recent-text">まだレビューがありません</div>
+  </div>
+</section>

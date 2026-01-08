@@ -1,37 +1,65 @@
-<h1>店舗一覧</h1>
+<div class="shops-page">
 
-<%= form_with url: shops_path, method: :get, local: true, class: "shop-search" do %>
-  <%= text_field_tag :q, params[:q], placeholder: "店名 or エリア" %>
-  <%= select_tag :sort,
-        options_for_select([["新着","new"],["古い順","old"]], params[:sort]) %>
-  <%= submit_tag "検索" %>
-<% end %>
+  <!-- ヘッダー -->
+  <div class="shops-header">
+    <div class="shops-title-wrap">
+      <h1 class="shops-title">店舗一覧</h1>
+      <p class="shops-subtitle">お気に入りの一杯を見つけよう</p>
+    </div>
 
-<% if logged_in? %>
-  <p><%= link_to "店舗を登録", new_shop_path, class: "new-shop-link" %></p>
-<% end %>
+    <% if logged_in? %>
+      <%= link_to "＋ 店舗を登録", new_shop_path, class: "btn-add-shop" %>
+    <% end %>
+  </div>
 
-<ul class="shop-list">
-  <% @shops.each do |shop| %>
-    <li class="shop-item">
-      <div class="shop-image">
-      <%= link_to shop_path(shop) do %>
-        <% if shop.menu_photos.attached? %>
-          <%= image_tag shop.menu_photos.first %>
-        <% elsif shop.building_photo.attached? %>
-          <%= image_tag shop.building_photo %>
-        <% else %>
-          <div class="no-image">画像なし</div>
-        <% end %>
-       <% end %>
-      </div>
+  <!-- 検索 -->
+  <%= form_with url: shops_path, method: :get, local: true, class: "shop-search" do %>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <%= text_field_tag :q, params[:q], placeholder: "店名 or エリア", class: "search-input" %>
+    </div>
 
-      <div class="shop-info">
-        <%= link_to shop.name, shop_path(shop), class: "shop-name" %>
-        <div class="shop-address">
-          📍<%= shop.address %>
-        </div>
-      </div>
-    </li>
+    <%= select_tag :sort,
+          options_for_select([["新着順","new"],["古い順","old"]], params[:sort]),
+          class: "search-select" %>
+
+    <%= submit_tag "検索", class: "btn-search" %>
   <% end %>
-</ul>
+
+  <!-- 店舗リスト -->
+  <ul class="shop-list">
+    <% @shops.each do |shop| %>
+      <li class="shop-card">
+        <%= link_to shop_path(shop), class: "shop-card-link" do %>
+
+          <div class="shop-thumb">
+            <% if shop.menu_photos.attached? %>
+              <%= image_tag shop.menu_photos.first %>
+            <% elsif shop.building_photo.attached? %>
+              <%= image_tag shop.building_photo %>
+            <% else %>
+              <div class="no-image">画像無し</div>
+            <% end %>
+          </div>
+
+          <div class="shop-body">
+            <div class="shop-name-row">
+              <h2 class="shop-name"><%= shop.name %></h2>
+              <% if shop.reviews.any? %>
+                <span class="shop-rating">★ <%= format("%.1f", shop.reviews.average(:rating)) %></span>
+              <% end %>
+            </div>
+
+            <div class="shop-address">📍 <%= shop.address %></div>
+
+            <div class="shop-desc">
+              <%= truncate(shop.description, length: 70) %>
+            </div>
+          </div>
+
+          <div class="shop-arrow">›</div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

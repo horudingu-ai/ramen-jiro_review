@@ -1,17 +1,18 @@
 <!-- 店舗詳細ページ -->
 <div class="shop-show">
-  <h1 class="shop-name"><%= @shop.name %></h1>
-  <% avg = @shop.reviews.average(:rating)&.to_f %>
-  <% count = @shop.reviews.count %>
-  <div class="shop-rating">
+  <h1 class="shop-name/s/s"><%= @shop.name %></h1>
+  <% avg = @shop.reviews.average(:rating) %>
+<% count = @shop.reviews.count %>
+<% rounded = avg ? avg.to_f.round : 0 %>
+  <div class="shop-rating2">
     <% if count > 0 %>
-      <span class="stars"><%= "★" * avg.round %><%= "☆" * (5 - avg.round) %></span>
-      <span class="avg"><%= format("%.1f", avg) %></span>
-      <span class="count">（<%= count %>件）</span>
+     <span class="stars"><%= "★" * rounded %><%= "☆" * (5 - rounded) %></span>
+<span class="avg"><%= avg ? format("%.1f", avg.to_f) : "0.0" %></span>
+<span class="count">（<%= count %>件）</span>
     <% else %>
       <span class="no-review">評価なし（0件）</span>
     <% end %>
-  </div>
+</div>
   <!-- 上段：写真＋店舗情報 -->
   <div class="shop-main">
     <!-- 左：写真 -->
@@ -69,6 +70,5 @@
           </div>
         <% end %>
       </div>
-    <% end %>
-  </div>
-</div>
+       <% end %>
+ </div>

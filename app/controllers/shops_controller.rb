@@ -28,6 +28,7 @@ class ShopsController < ApplicationController
     .limit(5)
 end
   def show
+     @shop = Shop.find(params[:id])
   @reviews = @shop.reviews.includes(:user).order(created_at: :desc)
 end
   
@@ -71,7 +72,8 @@ private
 
  def shop_params
   params.require(:shop).permit(
-    :name, :area, :address, :business_hours, :closed_days, :access, :notes, :building_photo,
+    :name, :address, :business_hours, :closed_days, :access, :notes,
+    :building_photo,
     menu_photos: []
   )
 end

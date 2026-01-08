@@ -1,9 +1,12 @@
 @import "shops.css";
 @import "reviews.css";
 @import "home.css";
+@import "users.css";
+@import "review.css";
 /* application.css */
 /* ヘッダー全体のスタイル */
 .site-header{ display: grid;
+  z-index: 3000; 
   grid-template-columns: 1fr auto 1fr; /* 左・中央・右の幅均等に */
   align-items: center; }
 
@@ -27,6 +30,7 @@
   font-weight: bold;
   align-items: center;
 }
+
 /* ログイン/新規登録を横並びに */
 .header-nav{
   display: flex;
@@ -115,6 +119,18 @@
 }
 .star-rating .star.is-on {
   color: #f5b301; /* 選択済み */
+}
+@media (max-width: 1024px) {
+  .header-title {
+    display: none;
+  }
+  .site-header{
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .header-right{
+    justify-self: end;
+  }
 }
 
 

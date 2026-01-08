@@ -63,3 +63,209 @@
   background:#000;
   color:#fff;
 }
+.page-title{
+  max-width: 920px;
+  margin: 22px auto 12px;
+  padding: 0 16px;
+  font-size: 22px;
+  font-weight: 900;
+  position: relative;
+}
+
+.page-title::before{
+  content:"";
+  display:inline-block;
+  width: 6px;
+  height: 18px;
+  background: #f5b400;
+  border-radius: 3px;
+  margin-right: 10px;
+  vertical-align: -2px;
+}
+
+/* メインカード */
+.account-card{
+  max-width: 920px;
+  margin: 0 auto 18px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+/* 上段 */
+.account-top{
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+
+.account-avatar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.avatar-img{
+  width: 84px;
+  height: 84px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 6px solid #fff;
+  background: #f2f2f2;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+}
+
+/* 名前・タグ */
+.account-profile{
+  min-width: 0;
+}
+
+.account-name{
+  font-size: 18px;
+  font-weight: 900;
+  color:#111;
+  line-height: 1.2;
+}
+
+.account-badges{
+  margin-top: 8px;
+  display:flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badge-yellow{
+  background: #fff3bf;
+  border: 1px solid #ffe08a;
+  color:#7a5a00;
+}
+
+.badge-gray{
+  background: #f4f4f4;
+  border: 1px solid #e6e6e6;
+  color:#555;
+}
+
+/* 編集ボタン */
+.account-actions{
+  justify-self: end;
+}
+
+.btn-edit{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #111;
+  color:#fff;
+  font-weight: 900;
+  font-size: 13px;
+  text-decoration:none;
+  border: none;
+}
+
+.btn-edit:hover{
+  filter: brightness(1.08);
+}
+
+.account-divider{
+  border: none;
+  border-top: 1px solid #f0f0f0;
+  margin: 16px 0 10px;
+}
+
+/* 下段：2カラム情報 */
+.account-details{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 22px;
+  padding-top: 6px;
+}
+
+.detail-label{
+  font-size: 12px;
+  font-weight: 800;
+  color:#777;
+  margin-bottom: 4px;
+}
+
+.detail-value{
+  font-size: 13px;
+  font-weight: 800;
+  color:#111;
+  word-break: break-word;
+}
+
+/* 最近の活動 */
+.recent-card{
+  max-width: 920px;
+  margin: 0 auto 30px;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+}
+
+.recent-title{
+  font-weight: 900;
+  font-size: 14px;
+  color:#111;
+  margin-bottom: 12px;
+}
+
+.recent-empty{
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 18px;
+  background: #fafafa;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.recent-icon{
+  font-size: 22px;
+  opacity: 0.7;
+}
+
+.recent-text{
+  font-size: 13px;
+  color:#666;
+  font-weight: 800;
+}
+
+/* スマホ */
+@media (max-width: 720px){
+  .account-top{
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto;
+    align-items: start;
+  }
+
+  .account-actions{
+    grid-column: 2 / 3;
+    justify-self: end;
+    margin-top: 6px;
+  }
+  .account-details{
+    grid-template-columns: 1fr;
+  }
+}

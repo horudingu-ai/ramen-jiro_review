@@ -1,0 +1,32 @@
+
+<div id="map" style="height: 400px; width: 100%;"></div>
+
+<script>
+  function initMap() {
+    // マップの初期位置を設定
+    const initialLocation = { lat: 35.658581, lng: 139.745433 };
+
+    // マップを作成
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: initialLocation,
+      zoom: 12
+    });
+
+    // マーカーを追加
+    <%= @markers.to_json.html_safe %>.forEach(function(marker_data) {
+      const marker = new google.maps.Marker({
+        position: { lat: marker_data.lat, lng: marker_data.lng },
+        map: map,
+        title: marker_data.title
+      });
+
+      const infoWindow = new google.maps.InfoWindow({
+        content: marker_data.info_window
+      });
+
+      marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+      });
+    });
+  }
+</script>

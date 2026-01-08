@@ -103,8 +103,7 @@
 .mini-item{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:12px;
+  gap: 6px;
   padding:10px 0;
   border-bottom:1px solid #eee;
 }
@@ -125,6 +124,8 @@
   margin-top:4px;
   color:red;
 }
+/*口コミ新着店舗の画像/index*/
+.mini-thumb { order: -1; }
 /*口コミ新着店舗の画像/index*/
 .mini-thumb img{
   width:80px;

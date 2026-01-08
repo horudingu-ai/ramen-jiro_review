@@ -3,21 +3,18 @@
   padding: 0;
   margin: 0;
 }
-
 .shop-item {
   display: flex;
   gap: 12px;
   padding: 12px 0;
   border-bottom: 1px solid #eee;
 }
-
 .shop-image img {
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 8px;
 }
-
 .no-image {
   width: 80px;
   height: 80px;
@@ -29,13 +26,11 @@
   font-size: 12px;
   color: #888;
 }
-
 .shop-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 .shop-name {
   font-size: 18px;
   font-weight: bold;
@@ -58,7 +53,8 @@
 .photo-card{
   border:1px solid #ddd;
   border-radius:12px;
-  padding:12px;
+  padding: 20px;
+
 }
 
 .photo-link{
@@ -100,17 +96,24 @@
   font-size: 26px;
   font-weight: bold;
 }
-
-.shop-rating {
-  margin-bottom: 20px;
-  font-size: 15px;
+/*店舗詳細の黄色枠*/
+.shop-rating{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;             
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #ffe08a;     
+  background: #fff5c2;            
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
 }
-
 /* 上段レイアウト */
 .shop-main {
   display: grid;
   grid-template-columns: 1fr 320px;
-  gap: 24px;
   align-items: flex-start;
 }
 
@@ -142,6 +145,7 @@
   border-radius: 10px;
   padding: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-left: -20px;
 }
 
 .shop-info-card ul {
@@ -194,3 +198,343 @@
 .shop-image{
   cursor: pointer;
 }
+/* ===== Shop New Form (card UI) ===== */
+.shop-form-page{
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+}
+.shop-form-header h1{
+  font-size: 24px;
+  margin: 0 0 6px;
+}
+
+.shop-form-lead{
+  margin: 0 0 16px;
+  color: #666;
+  font-size: 13px;
+}
+
+.shop-form-card{
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+.form-errors{
+  background:#fff3f3;
+  border:1px solid #ffd0d0;
+  color:#b10000;
+  border-radius:10px;
+  padding:10px 12px;
+  margin-bottom:12px;
+  font-size: 13px;
+}
+.form-errors ul{ margin:0; padding-left:18px; }
+
+.form-group{
+  margin-bottom: 14px;
+}
+
+.form-label{
+  display:inline-block;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.req{
+  display:inline-block;
+  margin-left: 8px;
+  font-size: 11px;
+  color:#d11;
+  font-weight: 700;
+}
+
+.form-control{
+  width:100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+  font-size: 14px;
+}
+
+.form-control:focus{
+  border-color: #cfcfcf;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+}
+
+.form-section-title{
+  margin: 16px 0 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f1f1f1;
+  font-weight: 800;
+  font-size: 13px;
+  color:#111;
+}
+/*写真アップロードbox*/
+.upload-grid
+{ display:grid;
+   grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-bottom: 6px;
+  position: relative;
+  z-index: 1; 
+}
+/*写真アップロードbox*/
+.upload-box
+{ border: 1px dashed #d9d9d9;
+   border-radius: 12px;
+ padding: 12px;
+ background: #fafafa; 
+  position: relative;
+  z-index: 1; 
+}
+.form-control{
+  position: relative;
+  z-index: 2;
+}
+.upload-title{
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 8px;
+  color:#111;
+}
+
+.file-input{
+  width:100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  font-size: 13px;
+}
+
+.upload-hint{
+  margin-top: 6px;
+  font-size: 11px;
+  color:#777;
+}
+
+.form-actions{
+  display:flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn-cancel{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  background:#fff;
+  color:#333;
+  text-decoration:none;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.btn-primary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 16px;
+  border-radius: 10px;}
+
+
+  /* ===== Shops Index ===== */
+.shops-page{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+/* ヘッダー */
+.shops-header{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.shops-title{
+  font-size: 22px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.shops-subtitle{
+  font-size: 13px;
+  color:#666;
+  margin-top: 4px;
+}
+
+.btn-add-shop{
+  background:#ffd400;
+  color:#111;
+  font-weight:900;
+  font-size:13px;
+  padding: 10px 14px;
+  border-radius:10px;
+  text-decoration:none;
+}
+
+/* 検索 */
+.shop-search{
+  display:flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.search-box{
+  flex:1;
+  display:flex;
+  align-items:center;
+  background:#fff;
+  border:1px solid #e5e5e5;
+  border-radius:10px;
+  padding: 8px 10px;
+}
+
+.search-icon{
+  margin-right: 6px;
+  opacity: 0.6;
+}
+
+.search-input{
+  border:none;
+  outline:none;
+  width:100%;
+  font-size:14px;
+}
+
+.search-select{
+  border:1px solid #e5e5e5;
+  border-radius:10px;
+  padding: 8px 10px;
+}
+
+.btn-search{
+  background:#111;
+  color:#fff;
+  font-weight:800;
+  font-size:13px;
+  padding: 9px 14px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+}
+
+/* 店舗カード */
+.shop-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.shop-card{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:14px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+}
+
+.shop-card-link{
+  display:flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  text-decoration:none;
+  color:inherit;
+}
+
+/* 画像 */
+.shop-thumb{
+  width: 84px;
+  height: 84px;
+  border-radius:12px;
+  overflow:hidden;
+  flex-shrink:0;
+  background:#f3f3f3;
+}
+
+.shop-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* 本文 */
+.shop-body{
+  flex:1;
+  min-width:0;
+}
+
+.shop-name-row{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+.shop-name{
+  font-size:16px;
+  font-weight:900;
+  margin:0;
+}
+.shop-address{
+  font-size:13px;
+  color:#e53935;
+  margin-top: 4px;
+}
+
+.shop-desc{
+  font-size:13px;
+  color:#666;
+  margin-top: 6px;
+  line-height:1.4;
+}
+
+/* 矢印 */
+.shop-arrow{
+  font-size:22px;
+  color:#bbb;
+  flex-shrink:0;
+}
+
+/* 画像なし */
+.no-image{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  color:#999;
+}
+/* モバイル */
+@media (max-width: 640px){
+  .shop-card-link{
+    gap: 10px;
+  }
+  .shop-thumb{
+    width: 72px;
+    height: 72px;
+  }
+}
+/*.shop-rating2{
+  font-size:12px;
+  background:#fff3bf;
+  border:1px solid #ffe08a;
+  border-radius:999px;
+  padding: 2px 8px;
+  font-weight:800;
+}*/

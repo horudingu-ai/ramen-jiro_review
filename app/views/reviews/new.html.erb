@@ -1,60 +1,126 @@
-<h1><%= @shop.name %> に口コミ投稿</h1>
+<div class="review-page">
+  <header class="review-header">
+    <div class="review-header-title">
+      <span class="dot" aria-hidden="true"></span>
+      <h1><%= @shop.name %> に口コミ投稿</h1>
+    </div>
+    <p class="review-lead">あなたの体験を他のラーメン好きと共有しましょう。</p>
+  </header>
 
-<%= form_with model: [@shop, @review] do |f| %>
- <fieldset>
-  <legend>性別（任意）</legend>
+  <div class="review-card">
+    <%= form_with model: [@shop, @review], html: { class: "review-form" } do |f| %>
 
-  <label>
-    <%= f.radio_button :gender, "male" %>
-    男性
-  </label>
+      <!-- 性別 -->
+      <section class="form-section">
+        <div class="section-head">
+          <label class="section-label">性別</label>
+          <span class="tag tag-optional">任意</span>
+        </div>
 
-  <label>
-    <%= f.radio_button :gender, "female" %>
-    女性
-  </label>
+        <div class="radio-group">
+          <label class="radio-pill">
+            <%= f.radio_button :gender, "male" %>
+            <span>男性</span>
+          </label>
 
-  <label>
-    <%= f.radio_button :gender, nil, checked: true %>
-    回答しない
-  </label>
-</fieldset>
+          <label class="radio-pill">
+            <%= f.radio_button :gender, "female" %>
+            <span>女性</span>
+          </label>
+          <label class="radio-pill">
+            <%= f.radio_button :gender, "", checked: true %>
+            <span>回答しない</span>
+          </label>
+        </div>
+      </section>
 
-<div>
-  <%= f.label :age, "年齢（任意）" %><br>
-  <%= f.number_field :age, min: 1, max: 120, placeholder: "例）25" %>
-</div>
-  <div class="field">
-  <label>評価</label>
+      <!-- 年齢 -->
+      <section class="form-section">
+        <div class="section-head">
+          <%= f.label :age, "年齢", class: "section-label" %>
+          <span class="tag tag-optional">任意</span>
+        </div>
 
-  <!-- 送信される値 -->
-  <%= f.hidden_field :rating, id: "review_rating" %>
+        <div class="input-row">
+          <%= f.number_field :age, min: 1, max: 120, placeholder: "例）25", class: "text-input" %>
+          <span class="suffix">歳</span>
+        </div>
+      </section>
 
-  <!-- ★ UI -->
-  <div class="star-rating" data-max="5" data-input-id="review_rating">
-    <% 5.times do |i| %>
-      <button type="button" class="star" data-value="<%= i + 1 %>" aria-label="<%= i + 1 %> stars">★</button>
+      <hr class="divider">
+
+      <!-- 評価 -->
+      <section class="form-section">
+        <div class="section-head">
+          <label class="section-label">評価</label>
+          <span class="tag tag-required">必須</span>
+        </div>
+
+        <p class="help-text">★をクリックして評価してください</p>
+
+        <!-- 送信される値 -->
+        <%= f.hidden_field :rating, id: "review_rating" %>
+
+        <!-- ★ UI -->
+        <div class="star-rating" data-max="5" data-input-id="review_rating" role="radiogroup" aria-label="評価">
+          <% 5.times do |i| %>
+            <button
+              type="button"
+              class="star"
+              data-value="<%= i + 1 %>"
+              aria-label="<%= i + 1 %> 星"
+              aria-pressed="false"
+            >★</button>
+          <% end %>
+        </div>
+      </section>
+
+      <!-- 来店日 -->
+      <section class="form-section">
+        <div class="section-head">
+          <%= f.label :visit_date, "来店日", class: "section-label" %>
+          <span class="tag tag-required">必須</span>
+        </div>
+        <%= f.date_field :visit_date, class: "text-input" %>
+      </section>
+
+      <!-- 本文 -->
+      <section class="form-section">
+        <div class="section-head">
+          <%= f.label :body, "本文", class: "section-label" %>
+          <span class="tag tag-required">必須</span>
+        </div>
+
+        <div class="textarea-wrap">
+          <%= f.text_area :body, rows: 7, class: "textarea", maxlength: 1000, placeholder: "味、量、雰囲気などについて詳しく書いてください…" %>
+          <div class="count"><span id="body_count">0</span> / 1000文字</div>
+        </div>
+      </section>
+      <!-- 写真 -->
+      <section class="form-section">
+        <div class="section-head">
+          <%= f.label :images, "写真", class: "section-label" %>
+          <span class="tag tag-optional">任意</span>
+        </div>
+        <div class="upload-drop" id="uploadDrop" tabindex="0" role="button" aria-label="写真をアップロード">
+          <div class="upload-inner">
+            <div class="upload-icon" aria-hidden="true">🖼️</div>
+            <div class="upload-text">
+              <div class="upload-strong">ファイルをアップロード</div>
+              <div class="upload-sub">またはドラッグ＆ドロップ</div>
+              <div class="upload-note">PNG, JPG, GIF up to 10MB</div>
+            </div>
+          </div>
+          <%= f.file_field :images, multiple: true, accept: "image/*", class: "file-input", id: "review_images" %>
+        </div>
+        <div class="thumbs" id="thumbs" aria-live="polite"></div>
+      </section>
+      <p class="privacy-note">
+        投稿することで、利用規約とプライバシーポリシーに同意したことになります。
+      </p>
+      <div class="actions">
+        <%= f.submit "口コミを投稿する", class: "btn-primary" %>
+      </div>
     <% end %>
   </div>
-
-  <small class="hint">★をクリックして評価してください</small>
 </div>
-
-
-  <div>
-    <%= f.label :visit_date, "来店日" %><br>
-    <%= f.date_field :visit_date %>
-  </div>
-
-  <div>
-    <%= f.label :body, "本文" %><br>
-    <%= f.text_area :body, rows: 6 %>
-  </div>
-
-  <div>
-    <%= f.label :images, "写真" %><br>
-    <%= f.file_field :images, multiple: true %>
-  </div>
-
-  <%= f.submit "投稿" %>
-<% end %>
