@@ -7,7 +7,6 @@
     <% end %>
   </ul>
 <% end %>
-
 <%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
 <div>
   <%= f.label :icon, "プロフィール画像" %><br>
@@ -17,24 +16,19 @@
         <%= f.label :name, "名前" %><br>
         <%= f.text_field :name %>   
     </div>
-
-
   <div>
     <%= f.label :age, "年齢（任意・5歳刻み）" %><br>
     <%= f.select :age,
       options_for_select((0..120).step(5).to_a, @user.age),
       { include_blank: "未設定" } %>
   </div>
-
   <div>
     <p>性別（任意）</p>
     <%= f.radio_button :gender, "male" %>
     <%= f.label :gender_male, "男" %>
-
     <%= f.radio_button :gender, "female" %>
     <%= f.label :gender_female, "女" %>
   </div>
-
   <div>
     <%= f.label :location, "居住地（都道府県・任意）" %><br>
     <%= f.select :location,
@@ -51,9 +45,7 @@
       ],
       { include_blank: "未設定" } %>
   </div>
-
   <div>
     <%= f.submit "更新する" %>
   </div>
-
 <% end %>

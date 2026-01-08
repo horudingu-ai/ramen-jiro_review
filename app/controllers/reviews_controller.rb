@@ -16,16 +16,12 @@ class ReviewsController < ApplicationController
       redirect_to shop_path(@shop), notice: "口コミを投稿しました"
        else
       render :new, status: :unprocessable_entity
-    
-
     end
   end
-
   private
       def set_shop
     @shop = Shop.find(params[:shop_id])
       end
-
      def review_params
   params.require(:review).permit(:visit_date,:title,:body,:rating,:gender,:age,images: [])
 end  

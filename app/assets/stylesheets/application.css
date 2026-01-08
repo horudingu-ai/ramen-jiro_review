@@ -127,7 +127,6 @@
   .site-header{
     grid-template-columns: auto 1fr auto;
   }
-
   .header-right{
     justify-self: end;
   }

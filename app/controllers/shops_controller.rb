@@ -5,13 +5,11 @@ class ShopsController < ApplicationController
   def index
   @q = params[:q].to_s
   @sort = params[:sort].to_s
-
   scope = Shop.all
   scope = scope.where(
     "name LIKE ? OR area LIKE ? OR address LIKE ?",
     "%#{@q}%", "%#{@q}%", "%#{@q}%"
   ) if @q.present?
-
   scope =
     case @sort
     when "new" then scope.order(created_at: :desc)
@@ -69,7 +67,6 @@ private
   def set_shop
     @shop = Shop.find(params[:id])
   end
-
  def shop_params
   params.require(:shop).permit(
     :name, :address, :business_hours, :closed_days, :access, :notes,

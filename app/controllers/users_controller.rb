@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # 登録後にログインさせたいなら session[:user_id] = @user.id など
       redirect_to root_path, notice: "登録しました"
     else
       flash.now[:alert] = @user.errors.full_messages.join(", ")
@@ -18,7 +17,6 @@ class UsersController < ApplicationController
   def edit
   @user = current_user
 end
-
 def update
   @user = current_user
   if @user.update(user_params)
@@ -28,7 +26,6 @@ def update
   end
 end
   private
-
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :age, :gender, :location, :icon)
   end

@@ -3,10 +3,10 @@
   <% @photos.each do |photo| %>
     <% shop = photo.record %>
     <div class="photo-card">
-      <%= link_to shop_path(shop), class: "photo-link" do %>
+ <%= link_to shop_path(shop), class: "photo-link" do %>
         <div class="photo-thumb">
           <%= image_tag photo %>
-        </div>
+</div>
         <div class="photo-meta">
           <div class="photo-shop-name"><%= shop.name %></div>
           <div class="photo-shop-address">📍 <%= shop.address %></div>

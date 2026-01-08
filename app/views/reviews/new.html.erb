@@ -6,23 +6,19 @@
     </div>
     <p class="review-lead">あなたの体験を他のラーメン好きと共有しましょう。</p>
   </header>
-
   <div class="review-card">
     <%= form_with model: [@shop, @review], html: { class: "review-form" } do |f| %>
-
-      <!-- 性別 -->
       <section class="form-section">
         <div class="section-head">
           <label class="section-label">性別</label>
           <span class="tag tag-optional">任意</span>
         </div>
-
+        <!-- 性別（任意）男、女 -->
         <div class="radio-group">
           <label class="radio-pill">
             <%= f.radio_button :gender, "male" %>
             <span>男性</span>
-          </label>
-
+          </label>          
           <label class="radio-pill">
             <%= f.radio_button :gender, "female" %>
             <span>女性</span>

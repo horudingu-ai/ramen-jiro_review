@@ -1,7 +1,6 @@
 <h1 class="page-title">アカウント情報</h1>
-
 <section class="account-card">
-  <!-- 上段：アイコン + 名前/タグ + 編集ボタン -->
+  <!--アイコン、名前、 編集ボタン -->
   <div class="account-top">
     <div class="account-avatar">
       <% if @user&.icon&.attached? %>
@@ -10,12 +9,10 @@
         <%= image_tag "default_user.png", class: "avatar-img" %>
       <% end %>
     </div>
-
     <div class="account-profile">
       <div class="account-name-row">
         <div class="account-name"><%= @user&.name %></div>
       </div>
-
       <div class="account-badges">
         <span class="badge badge-yellow">ラーメン愛好家</span>
         <% if @user&.location.present? %>
@@ -30,16 +27,12 @@
       </div>
     <% end %>
   </div>
-
   <hr class="account-divider">
-
-  <!-- 下段：2カラムの情報 -->
   <div class="account-details">
     <div class="detail">
       <div class="detail-label">メールアドレス</div>
       <div class="detail-value"><%= @user&.email %></div>
     </div>
-
     <div class="detail">
       <div class="detail-label">性別</div>
       <div class="detail-value">
@@ -52,19 +45,16 @@
         <% end %>
       </div>
     </div>
-
     <div class="detail">
       <div class="detail-label">年齢</div>
       <div class="detail-value"><%= age_range(@user.age) %></div>
     </div>
-
     <div class="detail">
       <div class="detail-label">居住地</div>
       <div class="detail-value"><%= @user&.location.presence || "未設定" %></div>
     </div>
   </div>
 </section>
-
 <section class="recent-card">
   <div class="recent-title">最近の活動</div>
   <div class="recent-empty">
