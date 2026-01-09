@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-set -e
+sed -i 's/\r$//' bin/render-start
+sed -i 's/\r$//' bin/docker-entrypoint
+sed -i 's/\r$//' bin/rails
 
 bundle exec rails db:prepare
 bundle exec rails server -b 0.0.0.0 -p ${PORT:-10000}
+
