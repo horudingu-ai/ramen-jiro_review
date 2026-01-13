@@ -1,11 +1,12 @@
 class HomeController < ApplicationController
   def index
-    @pickup_shops = Shop
-      .joins(:menu_photos_attachments)
-      .includes(menu_photos_attachments: :blob)
-      .distinct
-      .order(Arel.sql("RANDOM()"))
-      .limit(5)
+  base = Shop
+    .left_joins(menu_photos_attachments: :blob)
+    .includes(menu_photos_attachments: :blob)
+    .distinct
+
+  @pickup_shops = base.to_a.sample(5)
+  
    # 新着店舗（最新5件）
     @new_shops = Shop.order(created_at: :desc).limit(5)
 
