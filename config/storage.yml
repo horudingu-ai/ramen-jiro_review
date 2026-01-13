@@ -25,7 +25,6 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
-amazon:
   service: Disk
   root: <%= Rails.root.join("storage") %>
   access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
@@ -34,4 +33,4 @@ amazon:
   bucket: <%= ENV["AWS_BUCKET"] %>
   cloudinary:
   service: Cloudinary
-
+  folder: <%= Rails.env %>
