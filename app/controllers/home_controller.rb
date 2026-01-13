@@ -1,9 +1,11 @@
 class HomeController < ApplicationController
-  def index
-  base = Shop
-    .left_joins(menu_photos_attachments: :blob)
-    .includes(menu_photos_attachments: :blob)
-    .distinct
+  @recent_review_shops = Shop
+  .joins(:reviews)
+  .includes(menu_photos_attachments: :blob) # reviews は含めない
+  .select("shops.*, MAX(reviews.created_at) AS last_reviewed_at")
+  .group("shops.id")
+  .order(Arel.sql("last_reviewed_at DESC"))
+  .limit(5)
 
   @pickup_shops = base.to_a.sample(5)
 
