@@ -49,7 +49,7 @@ Rails.application.configure do
   config.cache_store = :solid_cache_store
 
   # Replace the default in-process and non-durable queuing backend for Active Job.
- config.active_storage.service = :cloudinary
+config.active_storage.service = :cloudinary
   config.cache_store = :memory_store
 
   # Ignore bad email addresses and do not raise email delivery errors.

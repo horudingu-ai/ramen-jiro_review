@@ -5,7 +5,7 @@
 
 # 使用技術
 - Ruby 3.2.2
-- Ruby on Rails 7.1.2
+- Ruby on Rails 8.1.1
 - SQLite3
 - ActiveStorage
 - HTML / CSS
