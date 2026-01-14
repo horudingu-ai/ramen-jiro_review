@@ -56,7 +56,7 @@
   margin-bottom: 10px;
 }
 
-.section-label{
+.review-section-label{
   font-weight: 700;
   font-size: 13px;
 }
@@ -299,11 +299,12 @@
   font-size: 12px;
 }
 
-.actions{
+.review-actions{
   margin-top: 14px;
   display: flex;
   justify-content: flex-end;
 }
+/*口コミを投稿するボタン*/
 .btn-primary{
   height: 44px;
   padding: 0 18px;

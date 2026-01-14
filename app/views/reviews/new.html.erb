@@ -8,9 +8,9 @@
   </header>
   <div class="review-card">
     <%= form_with model: [@shop, @review], html: { class: "review-form" } do |f| %>
-      <section class="form-section">
+      <section class="review-form-section">
         <div class="section-head">
-          <label class="section-label">性別</label>
+          <label class="review-section-label">性別</label>
           <span class="tag tag-optional">任意</span>
         </div>
         <!-- 性別（任意）男、女 -->
@@ -33,7 +33,7 @@
       <!-- 年齢 -->
       <section class="form-section">
         <div class="section-head">
-          <%= f.label :age, "年齢", class: "section-label" %>
+          <%= f.label :age, "年齢", class: "review-section-label" %>
           <span class="tag tag-optional">任意</span>
         </div>
 
@@ -48,7 +48,7 @@
       <!-- 評価 -->
       <section class="form-section">
         <div class="section-head">
-          <label class="section-label">評価</label>
+          <label class="review-section-label">評価</label>
           <span class="tag tag-required">必須</span>
         </div>
 
@@ -74,7 +74,7 @@
       <!-- 来店日 -->
       <section class="form-section">
         <div class="section-head">
-          <%= f.label :visit_date, "来店日", class: "section-label" %>
+          <%= f.label :visit_date, "来店日", class: "review-section-label" %>
           <span class="tag tag-required">必須</span>
         </div>
         <%= f.date_field :visit_date, class: "text-input" %>
@@ -83,7 +83,7 @@
       <!-- 本文 -->
       <section class="form-section">
         <div class="section-head">
-          <%= f.label :body, "本文", class: "section-label" %>
+          <%= f.label :body, "本文", class: "review-section-label" %>
           <span class="tag tag-required">必須</span>
         </div>
 
@@ -95,7 +95,7 @@
       <!-- 写真 -->
       <section class="form-section">
         <div class="section-head">
-          <%= f.label :images, "写真", class: "section-label" %>
+          <%= f.label :images, "写真", class: "review-section-label" %>
           <span class="tag tag-optional">任意</span>
         </div>
         <div class="upload-drop" id="uploadDrop" tabindex="0" role="button" aria-label="写真をアップロード">
@@ -111,10 +111,7 @@
         </div>
         <div class="thumbs" id="thumbs" aria-live="polite"></div>
       </section>
-      <p class="privacy-note">
-        投稿することで、利用規約とプライバシーポリシーに同意したことになります。
-      </p>
-      <div class="actions">
+      <div class="review-actions">
         <%= f.submit "口コミを投稿する", class: "btn-primary" %>
       </div>
     <% end %>

@@ -198,7 +198,7 @@
 .shop-image{
   cursor: pointer;
 }
-/* ===== Shop New Form (card UI) ===== */
+/* ===== Shop New html ===== */
 .shop-form-page{
   max-width: 760px;
   margin: 0 auto;
@@ -422,7 +422,7 @@
   padding: 8px 10px;
 }
 
-.btn-search{
+.shop-btn-search{
   background:#111;
   color:#fff;
   font-weight:800;
@@ -474,7 +474,7 @@
 }
 
 /* 本文 */
-.shop-body{
+.shop-info2{
   flex:1;
   min-width:0;
 }

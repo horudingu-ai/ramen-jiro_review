@@ -12,7 +12,6 @@
 <%= javascript_importmap_tags %>
 <%= javascript_include_tag "https://maps.googleapis.com/maps/&callback=initMap", async: true, defer: true %>
   </head>
-
   <body>
     <header class="site-header">
       <div class="logo">
@@ -21,10 +20,9 @@
         <% end %>
       </div>
       <p class="header-title">全国のラーメン二郎を、口コミで探そう。</p>
-      <div class="header-right">
+      <div class="header-2"> 
         <div class="dropdown">
           <button class="dropdown-trigger" type="button">メニュー ▼</button>
-
           <div class="dropdown-menu">
             <% if logged_in? %>
               <%= link_to "アカウント情報", account_path, class: "dropdown-item" %>
@@ -34,7 +32,6 @@
             <%= link_to "写真一覧", photos_shops_path, class: "dropdown-item" %>
           </div>
         </div>
-
         <% unless logged_in? %>
           <nav class="header-nav">
             <%= link_to "ログイン", login_path, class: "btn" %>
@@ -48,7 +45,7 @@
       </div>
     </header>
 
-    <main class="container">
+    <main>
       <%= yield %>
     </main>
   </body>

@@ -18,11 +18,12 @@
   justify-self: start;
 }
 /* ドロップダウンメニュー、新規登録/ログイン/ログアウト */
-.header-right{
+.header-2{
   margin-left: auto;         
   display: flex;
   align-items: center;
-  gap: 12px;                   
+  gap: 12px;  
+  justify-self: end;                 
 }
 /* ヘッダーのタイトル */
 .header-title{
@@ -127,10 +128,4 @@
   .site-header{
     grid-template-columns: auto 1fr auto;
   }
-  .header-right{
-    justify-self: end;
-  }
 }
-
-
-

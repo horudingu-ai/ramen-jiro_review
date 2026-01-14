@@ -23,7 +23,7 @@
           options_for_select([["新着順","new"],["古い順","old"]], params[:sort]),
           class: "search-select" %>
 
-    <%= submit_tag "検索", class: "btn-search" %>
+    <%= submit_tag "検索", class: "shop-btn-search" %>
   <% end %>
 
   <!-- 店舗リスト -->
@@ -42,7 +42,7 @@
             <% end %>
           </div>
 
-          <div class="shop-body">
+          <div class="shop-info2">
             <div class="shop-name-row">
               <h2 class="shop-name"><%= shop.name %></h2>
               <% if shop.reviews.any? %>
@@ -57,7 +57,7 @@
             </div>
           </div>
 
-          <div class="shop-arrow">›</div>
+          <div class="shop-arrow"></div>
         <% end %>
       </li>
     <% end %>
