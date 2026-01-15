@@ -1,0 +1,63 @@
+<h1><%= @shop.name %> の分析</h1>
+
+
+<h2>年代別評価（一覧）</h2>
+<table class="review-summary-table">
+  <thead>
+    <tr>
+      <th>年代</th>
+      <th>件数</th>
+      <th>総合評価</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @by_age.each do |age, data| %>
+      <tr>
+        <td><%= age %></td>
+        <td><%= data[:count] %>件</td>
+        <td>
+          <% if data[:overall].present? %>
+            <% r = data[:overall].round %>
+            <%= "★" * r %><%= "☆" * (5 - r) %>
+            （<%= format("%.1f", data[:overall]) %>）
+          <% else %>
+            —
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>性別別評価（一覧）</h2>
+<table class="review-summary-table">
+  <thead>
+    <tr>
+      <th>性別</th>
+      <th>件数</th>
+      <th>総合評価</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @by_gender.each do |gender, data| %>
+      <tr>
+        <td><%= gender %></td>
+        <td><%= data[:count] %>件</td>
+        <td>
+          <% if data[:overall].present? %>
+            <% r = data[:overall].round %>
+            <%= "★" * r %><%= "☆" * (5 - r) %>
+            （<%= format("%.1f", data[:overall]) %>）
+          <% else %>
+            —
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<p>
+  <%= link_to "店舗詳細に戻る", shop_path(@shop) %>
+</p>

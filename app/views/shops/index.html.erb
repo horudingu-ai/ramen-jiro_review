@@ -2,10 +2,24 @@
 
   <!-- ヘッダー -->
   <div class="shops-header">
-    <div class="shops-title-wrap">
+    <div class="shops-list-title">
       <h1 class="shops-title">店舗一覧</h1>
       <p class="shops-subtitle">お気に入りの一杯を見つけよう</p>
     </div>
+<br></div>
+ <div class="shops-open-btn">
+    <!-- 今空いているお店のみ（ON/OFF） -->
+    <%= form_with url: shops_path, method: :get, local: true, class: "open-toggle-form" do %>
+      <!-- 既存の検索条件があるなら引き継ぐ -->
+      <%= hidden_field_tag :q, params[:q] %>
+      <%= hidden_field_tag :sort, params[:sort] %>
+
+      <label class="toggle-btn">
+        <%= check_box_tag :open_now, "1", params[:open_now] == "1", onchange: "this.form.submit()" %>
+       <span class="toggle-btn-ui"></span>
+        <span class="toggle-label">今空いているお店のみ</span>
+      </label>
+    <% end %>
 
     <% if logged_in? %>
       <%= link_to "＋ 店舗を登録", new_shop_path, class: "btn-add-shop" %>
@@ -52,14 +66,13 @@
 
             <div class="shop-address">📍 <%= shop.address %></div>
 
-            <div class="shop-desc">
-              <%= truncate(shop.description, length: 70) %>
-            </div>
-          </div>
-
-          <div class="shop-arrow"></div>
-        <% end %>
-      </li>
+<div class="shop-desc">
+<%= truncate(shop.description, length: 70) %>
+   </div>
+  </div>
+<div class="shop-arrow"></div>
+    <% end %>
+  </li>
     <% end %>
   </ul>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_08_054158) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_15_084219) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -50,11 +50,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_08_054158) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "age"
+    t.integer "age_group"
     t.string "author_name"
     t.text "body"
     t.datetime "created_at", null: false
     t.integer "gender"
     t.integer "rating"
+    t.integer "rating_atmosphere"
+    t.integer "rating_cleanliness"
+    t.integer "rating_service"
+    t.integer "rating_taste"
+    t.integer "rating_value"
     t.integer "shop_id", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"

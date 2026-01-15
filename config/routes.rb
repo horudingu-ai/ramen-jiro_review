@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # 店舗（CRUD） + 口コミ（店舗に紐づく）
   resources :shops do
     resources :reviews, only: [:new, :create]
+    get :detailed_review, on: :member
   end
 
   # プロフィール（自分用）

@@ -1,5 +1,5 @@
 class ShopsController < ApplicationController
-  before_action :set_shop, only: [:show, :edit, :update, :destroy]
+  before_action :set_shop, only: [:show, :edit, :update, :destroy, :detailed_review, ]
  before_action :require_login, only: [:new, :create]
 
   def index
@@ -62,6 +62,52 @@ end
     .includes(:record, :blob)
     .where(record_type: "Shop", name: "menu_photos")
     .order(created_at: :desc)
+end
+def detailed_review
+  base_all = @shop.reviews
+
+  # ① 一括表示（年代別）
+  @by_age = Review.age_groups.keys.index_with do |age|
+    rel = base_all.where(age_group: age)
+    {
+      count: rel.count,
+      overall: rel.average(:rating)&.to_f,
+      taste: rel.average(:rating_taste)&.to_f,
+      service: rel.average(:rating_service)&.to_f,
+      value: rel.average(:rating_value)&.to_f,
+      cleanliness: rel.average(:rating_cleanliness)&.to_f,
+      atmosphere: rel.average(:rating_atmosphere)&.to_f
+    }
+  end
+
+  # ② 一括表示（性別別）
+  @by_gender = Review.genders.keys.index_with do |g|
+    rel = base_all.where(gender: g)
+    {
+      count: rel.count,
+      overall: rel.average(:rating)&.to_f,
+      taste: rel.average(:rating_taste)&.to_f,
+      service: rel.average(:rating_service)&.to_f,
+      value: rel.average(:rating_value)&.to_f,
+      cleanliness: rel.average(:rating_cleanliness)&.to_f,
+      atmosphere: rel.average(:rating_atmosphere)&.to_f
+    }
+  end
+
+  # ③（任意）フォームの「絞り込み結果」も下に出したい場合
+  base = base_all
+  base = base.where(age_group: params[:age_group]) if params[:age_group].present?
+  base = base.where(gender: params[:gender]) if params[:gender].present?
+
+  @count = base.count
+  @avg_overall = base.average(:rating)&.to_f
+  @category_avgs = {
+    taste: base.average(:rating_taste)&.to_f,
+    service: base.average(:rating_service)&.to_f,
+    value: base.average(:rating_value)&.to_f,
+    cleanliness: base.average(:rating_cleanliness)&.to_f,
+    atmosphere: base.average(:rating_atmosphere)&.to_f
+  }
 end
 private
   def set_shop

@@ -12,6 +12,8 @@
     <% else %>
       <span class="no-review">評価なし（0件）</span>
     <% end %>
+   <%= link_to "詳しい評価を見る", detailed_review_shop_path(@shop), class: "btn" %>
+
 </div>
   <!-- 上段：写真＋店舗情報 -->
   <div class="shop-main">
