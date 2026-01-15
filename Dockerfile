@@ -68,18 +68,13 @@ RUN groupadd --system --gid 1000 rails && \
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails
-
 # rails ユーザーに所有権を渡す（COPYの後が確実）
 RUN chown -R rails:rails /rails /usr/local/bundle
 USER 1000:1000
-
 WORKDIR /rails
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-# Render は $PORT で待ち受ける必要がある
-EXPOSE 10000
 
 # db:prepare → 起動（$PORT を使う）
 CMD ["bash", "-lc", "bundle exec rails db:prepare && bundle exec rails server -b 0.0.0.0 -p ${PORT:-10000}"]
