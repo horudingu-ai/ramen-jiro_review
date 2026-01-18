@@ -389,6 +389,7 @@ a { color: inherit; }
   max-width: 760px;
   margin: 0 auto;
   padding: 28px 16px 40px;
+  z-index: 1;
 }
 
 .shop-form-header h1{
@@ -468,7 +469,7 @@ a { color: inherit; }
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-bottom: 6px;
+  
 }
 
 .upload-box{
