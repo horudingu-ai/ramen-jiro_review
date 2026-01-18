@@ -5,14 +5,16 @@
 <% count = @shop.reviews.count %>
 <% rounded = avg ? avg.to_f.round : 0 %>
   <div class="shop-rating2">
+  <div class="review_shop_detail">
     <% if count > 0 %>
      <span class="stars"><%= "★" * rounded %><%= "☆" * (5 - rounded) %></span>
 <span class="avg"><%= avg ? format("%.1f", avg.to_f) : "0.0" %></span>
-<span class="count">（<%= count %>件）</span>
+<span class="review_count">（<%= count %>件）</span>
     <% else %>
       <span class="no-review">評価なし（0件）</span>
     <% end %>
-   <%= link_to "詳しい評価を見る", detailed_review_shop_path(@shop), class: "btn" %>
+  </div>
+   <%= link_to "詳しい評価を見る", detailed_review_shop_path(@shop), class: "to_detailed_btn" %>
 
 </div>
   <!-- 上段：写真＋店舗情報 -->

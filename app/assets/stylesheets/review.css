@@ -4,17 +4,14 @@
   padding: 0 16px;
   color: #111;
 }
-
 .review-header{
   margin-bottom: 18px;
 }
-
 .review-header-title{
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
 .review-header .dot{
   width: 12px;
   height: 12px;
@@ -22,20 +19,16 @@
   background: #f4c400; /* 黄色の丸 */
   flex: 0 0 auto;
 }
-
 .review-header h1{
   font-size: 22px;
   margin: 0;
   font-weight: 700;
 }
-
 .review-lead{
   margin: 6px 0 0 22px;
   color: #6b7280;
   font-size: 13px;
 }
-
-/* ===== Card ===== */
 .review-card{
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -43,12 +36,9 @@
   box-shadow: 0 8px 24px rgba(0,0,0,0.06);
   padding: 22px;
 }
-
-/* ===== Sections ===== */
 .form-section{
   margin: 16px 0;
 }
-
 .section-head{
   display: flex;
   align-items: center;
@@ -87,8 +77,6 @@
   border-top: 1px solid #eef2f7;
   margin: 18px 0;
 }
-
-/* ===== Inputs ===== */
 .text-input{
   width: 100%;
   height: 42px;
@@ -140,7 +128,6 @@
   accent-color: #f4c400;
 }
 
-/* ===== Star rating ===== */
 .help-text{
   margin: 0 0 10px;
   color: #6b7280;
@@ -163,11 +150,11 @@
   background: transparent;
   cursor: pointer;
   padding: 4px 2px;
-  color: #d1d5db; /* 未選択 */
+  color: #d1d5db; 
 }
 
 .star.is-active{
-  color: #f4c400; /* 選択 */
+  color: #f4c400; 
 }
 
 .star:focus{
@@ -178,12 +165,9 @@
   border-color: #f4c400;
   box-shadow: 0 0 0 4px rgba(244,196,0,0.18);
 }
-
-/* ===== Textarea + Counter ===== */
 .textarea-wrap{
   position: relative;
 }
-
 .textarea{
   width: 100%;
   border: 1px solid #e5e7eb;
@@ -206,7 +190,6 @@
   color: #9ca3af;
 }
 
-/* ===== Upload ===== */
 .upload-drop{
   position: relative;
   border: 2px dashed #e5e7eb;
@@ -260,15 +243,12 @@
   margin-top: 6px;
 }
 
-/* 実ファイル入力は見せない */
 .file-input{
   position: absolute;
   inset: 0;
   opacity: 0;
   cursor: pointer;
 }
-
-/* Thumbnails */
 .thumbs{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
@@ -291,8 +271,6 @@
   height: 100%;
   object-fit: cover;
 }
-
-/* ===== Footer / Button ===== */
 .privacy-note{
   margin: 12px 0 0;
   color: #9ca3af;

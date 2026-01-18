@@ -1,63 +1,178 @@
-<h1><%= @shop.name %> の分析</h1>
+<div class="detail-review-page">
+  <!-- ヘッダー -->
+  <div class="detail-topbar">
+    <%= link_to "←", shop_path(@shop), class: "detail_review_back-vector" %>
+    <div class="detail-title"><%= @shop.name %> の詳しい口コミ評価</div>
+  </div>
+<!-- 総合評価カード -->
+ <div class="detail-container">
+    <div class="card summary-card">
+      <div class="summary-left">
+        <div class="summary-label">総合評価</div>
+        <div class="summary-score-row">
+          <% overall = @overall_rating %>
+          <% # @overall_rating が無い場合は、by_age/by_gender から拾うのは難しいので nil 表示にしてます %>
+          <div class="summary-score">
+            <%= overall.present? ? format("%.1f", overall) : "—" %>
+          </div>
+          <div class="summary-stars">
+            <% if overall.present? %>
+              <% r = overall.round %>
+              <span class="stars">
+                <%= "★" * r %><%= "☆" * (5 - r) %>
+              </span>
+              <span class="summary-note">
+                （<%= @review_count.present? ? "#{@review_count}件の口コミ" : "" %>）
+              </span>
+            <% else %>
+              <span class="summary-note">（口コミなし）</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+     <div class="summary-right">
+        <div class="pill">
+          <div class="pill-label">回答数</div>
+          <div class="pill-value"><%= @review_count || 0 %></div>
+        </div>
+        <div class="pill">
+          <div class="pill-label">更新日</div>
+          <div class="pill-value"><%= @updated_on || Date.current.strftime("%Y/%m/%d") %></div>
+        </div>
+      </div>
+    </div>
 
-
-<h2>年代別評価（一覧）</h2>
-<table class="review-summary-table">
-  <thead>
-    <tr>
-      <th>年代</th>
-      <th>件数</th>
-      <th>総合評価</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @by_age.each do |age, data| %>
+    <!-- 中：2カラム -->
+    <div class="grid-2col">
+     <!-- 年代別 -->
+<div class="detail-review-card">
+  <div class="detail-review-card-head">
+    <h2 class="age_gender_card-title">年代別評価（一覧）</h2>
+  </div>
+  <% age_labels = {
+    "age_unknown" => "不明",
+    "teens" => "10代",
+    "twenties" => "20代",
+    "thirties" => "30代",
+    "forties" => "40代",
+    "fifties" => "50代",
+    "sixties_plus" => "60代以上"
+  } %>
+  <table class="summary-table">
+    <thead>
       <tr>
-        <td><%= age %></td>
-        <td><%= data[:count] %>件</td>
-        <td>
-          <% if data[:overall].present? %>
-            <% r = data[:overall].round %>
-            <%= "★" * r %><%= "☆" * (5 - r) %>
-            （<%= format("%.1f", data[:overall]) %>）
-          <% else %>
-            —
-          <% end %>
-        </td>
+        <th>年代</th>
+        <th class="th-num">件数</th>
+        <th class="th-rate">総合評価</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<h2>性別別評価（一覧）</h2>
-<table class="review-summary-table">
-  <thead>
-    <tr>
-      <th>性別</th>
-      <th>件数</th>
-      <th>総合評価</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @by_gender.each do |gender, data| %>
-      <tr>
-        <td><%= gender %></td>
-        <td><%= data[:count] %>件</td>
-        <td>
-          <% if data[:overall].present? %>
-            <% r = data[:overall].round %>
-            <%= "★" * r %><%= "☆" * (5 - r) %>
-            （<%= format("%.1f", data[:overall]) %>）
-          <% else %>
-            —
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody>
+      <% (@by_age || {}).each do |age, data| %>
+        <tr>
+          <td><%= age_labels[age.to_s] || age %></td>
+          <td class="td-num"><%= data[:count] %>件</td>
+          <td class="td-rate">
+            <% if data[:overall].present? %>
+              <% r = data[:overall].round %>
+              <span class="stars">
+                <%= "★" * r %><%= "☆" * (5 - r) %>
+              </span>
+              <span class="rate-num">（<%= format("%.1f", data[:overall]) %>）</span>
+            <% else %>
+              <span class="dash">—</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
+      <!-- 右：性別別 + 分布 -->
+      <% gender_labels = {
+    "gender_unknown" => "不明",
+    "male" => "男性",
+    "female" => "女性",
+    "other" => "その他"
+  } %>
+    
+      <div class="stack">
+        <!-- 性別別 -->
+        <div class="detail-review-card">
+          <div class="detail-review-card-head">
+            <h2 class="age_gender_card-title">性別別評価</h2>
+          </div>
 
-<p>
-  <%= link_to "店舗詳細に戻る", shop_path(@shop) %>
-</p>
+          <table class="summary-table">
+            <thead>
+              <tr>
+                <th>性別</th>
+                <th class="th-num">件数</th>
+                <th class="th-rate">総合評価</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% (@by_gender || {}).each do |gender, data| %>
+                <tr>
+                 <td><%= gender_labels[gender.to_s] || gender %></td>
+                  <td class="td-num"><%= data[:count] %>件</td>
+                  <td class="td-rate">
+                    <% if data[:overall].present? %>
+                      <% r = data[:overall].round %>
+                      <span class="stars">
+                        <%= "★" * r %><%= "☆" * (5 - r) %>
+                      </span>
+                      <span class="rate-num">（<%= format("%.1f", data[:overall]) %>）</span>
+                    <% else %>
+                      <span class="dash">—</span>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <!--レビュー分布 -->
+        <div class="detail-review-card">
+          <div class="detail-review-card-head">
+            <h3 class="card-title small">レビュー分布</h3>
+          </div>
+          <% gender_labels = {
+                     "gender_unknown" => "不明",
+                     "male" => "男性",
+                     "female" => "女性",
+                     "other" => "その他"
+                                 } %>
+          <% total = (@by_gender || {}).values.sum { |d| d[:count].to_i } %>
+
+          <div class="dist">
+            <% (@by_gender || {}).each do |gender, data| %>
+              <% count = data[:count].to_i %>
+              <% pct = total > 0 ? (count * 100.0 / total) : 0 %>
+
+              <div class="dist-row">
+              <div class="dist-label"><%= gender_labels[gender.to_s] || gender %></div>
+
+                <div class="dist-bar">
+                  <div class="dist-fill" style="width:<%= pct %>%"></div>
+                </div>
+
+                <div class="dist-meta">
+                  <%= total > 0 ? "#{pct.round}%（#{count}件）" : "0%（0件）" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下：戻るボタン -->
+    <div class="bottom-actions">
+      <%= link_to "店舗詳細に戻る", shop_path(@shop), class: "detailed_review_back-btn" %>
+    </div>
+
+  </div>
+</div>
