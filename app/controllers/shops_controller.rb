@@ -16,7 +16,13 @@ class ShopsController < ApplicationController
     when "old" then scope.order(created_at: :asc)
     else scope.order(created_at: :desc)
     end
-@shops = scope.with_attached_building_photo.with_attached_menu_photos
+scope = scope.with_attached_building_photo.with_attached_menu_photos
+
+    if params[:open_now] == "1"
+      scope = scope.to_a.select { |shop| shop.open_now? }
+    end
+
+    @shops = scope
 
   @pickup_shops = Shop
     .joins(:menu_photos_attachments)
@@ -66,7 +72,7 @@ end
 def detailed_review
   base_all = @shop.reviews
 
-  # ① 一括表示（年代別）
+  # 一括表示（年代別）
   @by_age = Review.age_groups.keys.index_with do |age|
     rel = base_all.where(age_group: age)
     {
@@ -80,7 +86,6 @@ def detailed_review
     }
   end
 
-  # ② 一括表示（性別別）
   @by_gender = Review.genders.keys.index_with do |g|
     rel = base_all.where(gender: g)
     {
@@ -94,7 +99,6 @@ def detailed_review
     }
   end
 
-  # ③（任意）フォームの「絞り込み結果」も下に出したい場合
   base = base_all
   base = base.where(age_group: params[:age_group]) if params[:age_group].present?
   base = base.where(gender: params[:gender]) if params[:gender].present?
@@ -109,6 +113,7 @@ def detailed_review
     atmosphere: base.average(:rating_atmosphere)&.to_f
   }
 end
+end
 private
   def set_shop
     @shop = Shop.find(params[:id])
@@ -119,5 +124,4 @@ private
     :building_photo,
     menu_photos: []
   )
-end
 end
