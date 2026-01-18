@@ -105,7 +105,6 @@
   font-size: 14px;
 }
 
-/* ===== Radios ===== */
 .radio-group{
   display: flex;
   gap: 10px;
@@ -242,8 +241,7 @@
   font-size: 11px;
   margin-top: 6px;
 }
-
-.file-input{
+.review-page .upload-drop .file-input{
   position: absolute;
   inset: 0;
   opacity: 0;
