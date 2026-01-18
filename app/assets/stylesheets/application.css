@@ -17,6 +17,8 @@
   width: auto;
   display: block;
   justify-self: start;
+  z-index: 1000;         
+  
 }
 /* ドロップダウンメニュー、新規登録/ログイン/ログアウト */
 .header-2{
@@ -24,7 +26,8 @@
   display: flex;
   align-items: center;
   gap: 12px;  
-  justify-self: end;                 
+  justify-self: end;
+  z-index: 1000;                          
 }
 /* ヘッダーのタイトル */
 .header-title{
