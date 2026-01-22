@@ -31,25 +31,25 @@ https://pacific-tor-87564-ea572241583d.herokuapp.com/
 「今行ける店舗」を探せることを目指しています。
 
 ## 5.主な機能
-ユーザー登録 / ログイン
-店舗の新規登録
-店舗写真・メニュー写真のアップロード
-口コミ投稿・星評価
-詳細評価ページ（集計表示）
+ユーザー登録 / ログイン<br>
+店舗の新規登録<br>
+店舗写真・メニュー写真のアップロード<br>
+口コミ投稿・星評価<br>
+詳細評価ページ（集計表示）<br>
 
 ## 6.技術スタック
-Ruby on Rails
-ActiveStorage
-Cloudinary（画像ストレージ）
-PostgreSQL
-Heroku
-HTML / CSS /javascript
-Git/Github (バージョン管理)
+Ruby on Rails<br>
+ActiveStorage<br>
+Cloudinary（画像ストレージ<br>
+PostgreSQL<br>
+Heroku<br>
+HTML / CSS /javascript<br>
+Git/Github (バージョン管理)<br>
 8.今後の展望
-口コミの絞り込み機能（年代・性別・評価別）
-お気に入り店舗機能の追加
-Google Maps 連携による店舗位置表示
-分析機能の追加(週間レポート、月間レポート等)
+口コミの絞り込み機能（年代・性別・評価別）<br>
+お気に入り店舗機能の追加<br>
+Google Maps 連携による店舗位置表示<br>
+分析機能の追加(週間レポート、月間レポート等)<br>
 
 テストアカウント
 動作確認用に、以下のテストアカウントをご利用いただけます。
