@@ -60,7 +60,8 @@
             <div class="shop-name-row">
               <h2 class="shop-name"><%= shop.name %></h2>
               <% if shop.reviews.any? %>
-                <span class="shop-rating">★ <%= format("%.1f", shop.reviews.average(:rating)) %></span>
+               <% if shop.reviews.any? %>
+  <span class="shop-rating">★ <%= format("%.1f", shop.reviews.average(:rating)) %></span>
               <% end %>
             </div>
 
