@@ -1,8 +1,9 @@
 class Review < ApplicationRecord
-  belongs_to :user, optional: true
+  belongs_to :user, optional: true       #optional: trueは匿名okにする
   belongs_to :shop
   has_many_attached :images
 
+  #年齢カラム
   enum :age_group, {
     age_unknown: 0,
     teens: 1,
@@ -12,15 +13,15 @@ class Review < ApplicationRecord
     fifties: 5,
     sixties_plus: 6
   }
-
+  #性別カラム
   enum :gender, {
     gender_unknown: 0,
     male: 1,
     female: 2,
     other: 3
   }
-
-  validates :rating, inclusion: { in: 1..5 }, allow_nil: true
-  validates :body, presence: true
+  #保存するための条件=validates
+validates :rating, presence: true, inclusion: { in: 1..5 }    #inclusionで1から5の範囲に制限、allow_nilでnil許可
+  validates :body, presence: true         #presence: trueで必須
 end
 

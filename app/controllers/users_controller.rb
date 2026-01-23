@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+#新規登録画面
   def new
     @user = User.new
   end
+  #ユーザー登録処理 保存まで
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params)     #フォームから来た値の箱
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_path, notice: "登録しました"
@@ -13,7 +15,7 @@ class UsersController < ApplicationController
     end
   end
  def account
-    @user = current_user
+    @user = current_user        #current_userはログインしてるユーザー
   end
   def edit
   @user = current_user
