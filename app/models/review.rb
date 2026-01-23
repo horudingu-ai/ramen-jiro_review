@@ -21,7 +21,7 @@ class Review < ApplicationRecord
     other: 3
   }
   #保存するための条件=validates
-validates :rating, presence: true, inclusion: { in: 1..5 }    #inclusionで1から5の範囲に制限、allow_nilでnil許可
+validates :rating, presence: true, inclusion: { in: 1..5 }    #inclusionで1から5の範囲に制限、
   validates :body, presence: true         #presence: trueで必須
 end
 
