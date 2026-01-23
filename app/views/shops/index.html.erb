@@ -62,7 +62,8 @@
               <% if shop.reviews.any? %>
                <% if shop.reviews.any? %>
   <span class="shop-rating">★ <%= format("%.1f", shop.reviews.average(:rating)) %></span>
-              <% end %>
+                <% end %>
+                <% end %> 
             </div>
 
             <div class="shop-address">📍 <%= shop.address %></div>
