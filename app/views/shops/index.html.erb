@@ -59,11 +59,10 @@
           <div class="shop-info2">
             <div class="shop-name-row">
               <h2 class="shop-name"><%= shop.name %></h2>
-              <% if shop.reviews.any? %>
-               <% if shop.reviews.any? %>
-  <span class="shop-rating">★ <%= format("%.1f", shop.reviews.average(:rating)) %></span>
-                <% end %>
-                <% end %> 
+              <% avg = shop.reviews.where.not(rating: nil).average(:rating) %>
+<% if avg.present? %>
+  <span class="shop-rating">★ <%= format("%.1f", avg.to_f) %></span>
+<% end %>
             </div>
 
             <div class="shop-address">📍 <%= shop.address %></div>
